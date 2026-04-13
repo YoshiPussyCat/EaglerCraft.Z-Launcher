@@ -65,4 +65,5 @@ To use it locally:
 
 Developed by 30gato_Yoshi  
 
-Special thanks to everyone who contributed to making EaglerCraft a popular browser-based Minecraft experience.
+Special thanks to everyone who contributed to the EaglerCraft community...
+_(and my friends for testing the .html)_
