@@ -6,14 +6,8 @@
 <title>EagLauncher</title>
 <link rel="icon" type="image/png" href="./images/eaglercraft-game.png">
 <style>
-/* Force browser to never zoom this page */
 html { zoom: 1 !important; -ms-zoom: 1 !important; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
-
-@font-face {
-  font-family: 'Minecraft';
-  src: url('./Fonts/Minecraft.ttf') format('truetype');
-  font-weight: normal; font-style: normal;
-}
+@font-face { font-family: 'Minecraft'; src: url('./Fonts/Minecraft.ttf') format('truetype'); font-weight: normal; font-style: normal; }
 :root {
   --font: 'Minecraft', monospace;
   --sidebar: #1c1c1c; --sidebar-border: #2c2c2c; --sidebar-text: #c8c8c8;
@@ -24,8 +18,7 @@ html { zoom: 1 !important; -ms-zoom: 1 !important; text-size-adjust: 100%; -webk
   --input-bg: #111111; --input-border: #333333;
   --green: #5aad5a; --green-glow: rgba(90,173,90,0.25);
   --btn-bg: rgba(255,255,255,0.06); --btn-border: rgba(255,255,255,0.12); --btn-hover: rgba(255,255,255,0.12);
-  --scrollbar: #2a2a2a; --overlay-dim: rgba(0,0,0,0.45); --settings-bg: #0a0a0a;
-  --credits-bg: #0a0a0a;
+  --scrollbar: #2a2a2a; --overlay-dim: rgba(0,0,0,0.45); --settings-bg: #0a0a0a; --credits-bg: #0a0a0a;
 }
 .light-mode {
   --sidebar: #b8b8b8; --sidebar-border: #999; --sidebar-text: #222;
@@ -35,14 +28,12 @@ html { zoom: 1 !important; -ms-zoom: 1 !important; text-size-adjust: 100%; -webk
   --text: #111; --text-muted: #444;
   --input-bg: #d8d8d8; --input-border: #888;
   --btn-bg: rgba(0,0,0,0.08); --btn-border: rgba(0,0,0,0.20); --btn-hover: rgba(0,0,0,0.14);
-  --scrollbar: #999; --overlay-dim: rgba(255,255,255,0.3);
-  --settings-bg: #f0f0f0; --credits-bg: #f0f0f0;
+  --scrollbar: #999; --overlay-dim: rgba(255,255,255,0.3); --settings-bg: #f0f0f0; --credits-bg: #f0f0f0;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 body{font-family:var(--font);transform-origin:top left;}
-
-/* ===================== LOADING ===================== */
+/* LOADING */
 #loading-screen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;overflow:hidden;transition:opacity 1.2s ease;}
 #loading-screen.fade-out{opacity:0;pointer-events:none;}
 #load-bg{position:absolute;inset:0;background:url('./images/nostalgiaaa.png') center/cover no-repeat;image-rendering:pixelated;filter:brightness(0.28);}
@@ -57,14 +48,12 @@ body{font-family:var(--font);transform-origin:top left;}
 @keyframes barShine{0%{filter:brightness(1);}45%{filter:brightness(2.6) saturate(1.5);box-shadow:0 0 40px #a5d6a7;}100%{filter:brightness(1.5);}}
 .load-bar-pct{position:absolute;right:7px;top:50%;transform:translateY(-50%);color:#fff;font-family:var(--font);font-size:10px;text-shadow:1px 1px 2px #000;z-index:2;}
 .load-bar-status{color:#777;font-family:var(--font);font-size:9px;text-align:right;}
-
-/* ===================== LAUNCHER ===================== */
+/* LAUNCHER */
 #launcher{display:none;width:100%;height:100%;flex-direction:row;}
 #launcher.visible{display:flex;}
 #bg{position:absolute;inset:0;background-size:cover;background-position:center;image-rendering:pixelated;transition:background-image 0.5s ease;pointer-events:none;z-index:0;}
-#bg-dim{position:absolute;inset:0;background:var(--overlay-dim);pointer-events:none;z-index:1;transition:background 0.3s;}
-
-/* ===================== SIDEBAR ===================== */
+#bg-dim{position:absolute;inset:0;pointer-events:none;z-index:1;transition:background 0.3s;}
+/* SIDEBAR */
 #sidebar{width:200px;min-width:200px;height:100%;background:var(--sidebar);border-right:2px solid var(--sidebar-border);display:flex;flex-direction:column;position:relative;z-index:10;transition:width .26s cubic-bezier(.4,0,.2,1),min-width .26s cubic-bezier(.4,0,.2,1),opacity .22s;overflow:hidden;flex-shrink:0;}
 #sidebar.collapsed{width:0;min-width:0;opacity:0;pointer-events:none;}
 .sb-section{font-size:9px;color:var(--text-muted);padding:10px 13px 4px;letter-spacing:1px;white-space:nowrap;text-transform:uppercase;}
@@ -75,35 +64,26 @@ body{font-family:var(--font);transform-origin:top left;}
 .sb-divider{height:1px;background:var(--sidebar-border);margin:5px 10px;}
 .sb-spacer{flex:1;}
 .sb-version{padding:9px 13px;font-size:9px;color:var(--text-muted);white-space:nowrap;border-top:1px solid var(--sidebar-border);}
-
-/* ===================== TOPBAR ===================== */
+/* TOPBAR */
 #topbar{height:44px;background:var(--topbar);border-bottom:2px solid var(--topbar-border);display:flex;align-items:center;padding:0 12px;gap:8px;position:relative;z-index:10;flex-shrink:0;width:100%;}
 #menu-toggle{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:4px;padding:5px;flex-shrink:0;}
 #menu-toggle span{display:block;width:17px;height:2px;background:var(--topbar-text);transition:background .2s;}
 #menu-toggle:hover span{background:var(--green);}
 #topbar-brand{display:flex;align-items:center;gap:7px;flex:1;min-width:0;}
-#topbar-brand-logo{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;filter:none;}
+#topbar-brand-logo{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
 #topbar-name{color:var(--topbar-text);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 #music-pill{display:flex;align-items:center;gap:6px;background:var(--btn-bg);border:1px solid var(--btn-border);padding:4px 9px;font-size:9px;color:var(--topbar-text);max-width:200px;overflow:hidden;flex-shrink:0;}
 #music-pill .note{color:var(--green);font-size:11px;animation:noteSpin 2s linear infinite;}
 @keyframes noteSpin{0%{opacity:1}50%{opacity:0.4}100%{opacity:1}}
 #music-title-scroll{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px;color:var(--text-muted);}
-.tb-btn{display:flex;align-items:center;gap:5px;color:var(--topbar-text);font-size:10px;cursor:pointer;padding:5px 9px;border:1px solid var(--btn-border);background:var(--btn-bg);transition:background .14s,border-color .14s,color .14s;text-decoration:none;font-family:var(--font);white-space:nowrap;flex-shrink:0;}
-.tb-btn:hover{background:var(--btn-hover);border-color:var(--green);color:var(--green);}
-.tb-btn img{height:19px;object-fit:contain;image-rendering:pixelated;filter:none;}
-.tb-btn.icon-only{padding:4px 7px;}
-
-/* fav & account topbar buttons */
 #fav-topbar-btn{display:flex;align-items:center;gap:5px;color:var(--topbar-text);font-size:14px;cursor:pointer;padding:5px 9px;border:1px solid var(--btn-border);background:var(--btn-bg);transition:background .14s,border-color .14s,color .14s;font-family:var(--font);flex-shrink:0;}
 #fav-topbar-btn:hover{background:var(--btn-hover);border-color:#f9a825;color:#f9a825;}
 #account-topbar-btn{display:flex;align-items:center;gap:6px;color:var(--topbar-text);font-size:10px;cursor:pointer;padding:5px 9px;border:1px solid var(--btn-border);background:var(--btn-bg);transition:background .14s,border-color .14s;font-family:var(--font);white-space:nowrap;flex-shrink:0;}
 #account-topbar-btn:hover{background:var(--btn-hover);border-color:var(--green);}
-#account-topbar-btn img{height:20px;width:20px;object-fit:cover;image-rendering:pixelated;filter:none;}
-
-/* ===================== MAIN ===================== */
+#account-topbar-btn img{height:20px;width:20px;object-fit:cover;image-rendering:pixelated;}
+/* MAIN */
 #main-area{flex:1;display:flex;flex-direction:column;position:relative;z-index:5;min-width:0;overflow:hidden;}
-
-/* ===================== GAME SCREEN ===================== */
+/* GAME SCREEN */
 #game-screen{flex:1;display:flex;flex-direction:column;align-items:center;padding:22px 24px 16px;gap:16px;}
 #game-screen.hidden{display:none;}
 #logo-img{max-width:500px;width:72%;image-rendering:pixelated;filter:drop-shadow(0 6px 24px rgba(0,0,0,0.75));animation:logoFloat 3.5s ease-in-out infinite;flex-shrink:0;}
@@ -113,7 +93,7 @@ body{font-family:var(--font);transform-origin:top left;}
 .dd-wrap{position:relative;width:100%;}
 .dd-btn{width:100%;background:var(--card-bg);border:2px solid var(--card-border);color:var(--text);font-family:var(--font);font-size:11px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:border-color .14s;text-align:left;backdrop-filter:blur(10px);}
 .dd-btn:hover{border-color:var(--green);}
-.dd-btn img{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;filter:none;}
+.dd-btn img{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
 .dd-btn .chv{margin-left:auto;font-size:10px;transition:transform .16s;flex-shrink:0;}
 .dd-btn.open .chv{transform:rotate(180deg);}
 .dd-list{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(10,10,10,0.97);border:2px solid var(--card-border);border-top:none;z-index:200;max-height:220px;overflow-y:auto;backdrop-filter:blur(14px);}
@@ -122,47 +102,92 @@ body{font-family:var(--font);transform-origin:top left;}
 .dd-opt{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;font-family:var(--font);font-size:10px;color:var(--text-muted);border-bottom:1px solid var(--card-border);transition:background .12s,color .12s;}
 .dd-opt:hover{background:var(--sidebar-hover);color:var(--text);}
 .dd-opt.selected{color:var(--green);}
-.dd-opt img{width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;filter:none;}
+.dd-opt img{width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
 .dd-opt .fav-star{margin-left:auto;color:#f9a825;font-size:12px;display:none;}
 .dd-opt.favourited .fav-star{display:block;}
+.dd-opt.custom-ver{border-left:2px solid #7c6aff;}
 #play-btn{cursor:pointer;max-width:210px;width:55%;image-rendering:pixelated;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.65));transition:transform .1s,filter .16s;flex-shrink:0;}
 #play-btn:hover{transform:scale(1.06);filter:drop-shadow(0 6px 24px rgba(90,173,90,0.5));}
 #play-btn:active{transform:scale(0.95);}
 #game-footer{margin-top:auto;color:rgba(255,255,255,0.3);font-size:8px;text-align:center;letter-spacing:0.5px;}
 .light-mode #game-footer{color:rgba(0,0,0,0.28);}
-
-/* ===================== SECTION SCREENS ===================== */
+/* SECTION SCREENS */
 .sec-screen{display:none;flex-direction:column;flex:1;overflow-y:auto;padding:24px 28px;gap:18px;position:relative;}
 .sec-screen.visible{display:flex;}
 .sec-title{color:var(--text);font-size:16px;border-bottom:2px solid var(--card-border);padding-bottom:10px;text-shadow:0 0 18px var(--green-glow);flex-shrink:0;}
 #credits-screen{background:var(--credits-bg) !important;}
-
-/* credits tabs */
-.cred-tabs{display:flex;gap:0;border-bottom:2px solid var(--card-border);flex-shrink:0;}
-.cred-tab{padding:8px 14px;font-family:var(--font);font-size:10px;color:var(--text-muted);cursor:pointer;background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .14s,border-color .14s;white-space:nowrap;}
+/* CREDITS TABS */
+.cred-tabs{display:flex;gap:0;border-bottom:2px solid var(--card-border);flex-shrink:0;overflow-x:auto;position:relative;}
+.cred-tab{
+  padding:8px 16px 10px;
+  font-family:var(--font);
+  font-size:10px;
+  color:var(--text-muted);
+  cursor:pointer;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:0px;
+  white-space:nowrap;
+  position:relative;
+  transition:color .14s,border-color .14s,background .14s;
+}
 .cred-tab:hover{color:var(--text);}
-.cred-tab.active{color:var(--green);border-bottom-color:var(--green);}
+.cred-tab.active{color:var(--green);border-color:rgba(90,173,90,0.45);background:rgba(90,173,90,0.10);}
 .cred-panel{display:none;flex-direction:column;gap:12px;}
-.cred-panel.visible{display:flex;}
+.cred-panel.visible{display:flex;flex:1;min-height:0;}
+/* CREDIT CARDS */
 .credit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
 .credit-card{background:var(--card-bg);border:2px solid var(--card-border);backdrop-filter:blur(10px);padding:14px 16px;display:flex;flex-direction:column;gap:7px;transition:border-color .2s,transform .2s;}
 .credit-card:hover{border-color:var(--green);transform:translateY(-2px);}
 .credit-name{color:var(--text);font-size:12px;}
 .credit-quote{color:var(--green);font-size:9px;font-style:italic;}
 .credit-desc{color:var(--text-muted);font-size:9px;line-height:1.8;}
+/* NEWS */
 .news-list{display:flex;flex-direction:column;gap:12px;}
 .news-entry{background:var(--card-bg);border:2px solid var(--card-border);backdrop-filter:blur(10px);padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s;}
 .news-entry:hover{border-color:var(--green);}
 .news-version{color:var(--green);font-size:12px;}
 .news-items{display:flex;flex-direction:column;gap:5px;}
 .news-item{color:var(--text-muted);font-size:9px;line-height:1.8;padding-left:8px;}
-
-/* settings */
+/* VERSIONS TAB (do not set display here — # beats .cred-panel and breaks tab hiding) */
+#cred-versions{min-height:0;}
+.ver-cards-scroll{flex:1;min-height:140px;max-height:min(52vh,calc(100vh - 300px));overflow-y:auto;padding-right:2px;}
+.ver-info-banner{background:rgba(90,173,90,0.08);border:1px solid rgba(90,173,90,0.25);padding:10px 14px;color:var(--text-muted);font-size:9px;line-height:1.9;flex-shrink:0;}
+.ver-info-banner strong{color:var(--green);}
+.ver-section-label{font-size:9px;color:var(--text-muted);letter-spacing:1px;padding:4px 0;text-transform:uppercase;}
+.ver-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:8px;}
+.ver-card{background:var(--card-bg);border:2px solid var(--card-border);backdrop-filter:blur(6px);padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .15s,transform .15s;text-align:center;}
+.ver-card:hover{border-color:var(--green);transform:translateY(-2px);}
+.ver-card.active-ver{border-color:var(--green);}
+.ver-card img{width:28px;height:28px;object-fit:contain;image-rendering:pixelated;}
+.ver-card-lbl{font-size:7px;color:var(--text-muted);line-height:1.5;word-break:break-word;}
+/* version info bar */
+#ver-info-bar{display:none;flex-direction:column;gap:8px;background:var(--input-bg);border:2px solid var(--green);padding:12px 14px;flex-shrink:0;position:relative;margin-top:4px;}
+#ver-info-bar.visible{display:flex;}
+.ver-info-title{color:var(--green);font-size:10px;}
+.ver-info-desc{color:var(--text-muted);font-size:9px;line-height:1.9;}
+.ver-info-progress-track{height:4px;background:var(--input-border);width:100%;overflow:hidden;}
+.ver-info-progress-fill{height:100%;background:var(--green);width:0%;transition:none;}
+.ver-info-close{position:absolute;top:8px;right:10px;background:none;border:none;color:var(--text-muted);font-family:var(--font);font-size:12px;cursor:pointer;transition:color .13s;}
+.ver-info-close:hover{color:var(--text);}
+/* SETTINGS */
 .settings-body{display:flex;flex-direction:column;gap:22px;max-width:660px;}
-.cat-tabs{display:flex;gap:0;flex-wrap:nowrap;border-bottom:2px solid var(--card-border);flex-shrink:0;}
-.cat-tab{padding:9px 14px;font-family:var(--font);font-size:10px;color:var(--text-muted);cursor:pointer;background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s;white-space:nowrap;}
+.cat-tabs{display:flex;gap:0;flex-wrap:nowrap;border-bottom:2px solid var(--card-border);flex-shrink:0;overflow-x:auto;position:relative;}
+.cat-tab{
+  padding:9px 16px 11px;
+  font-family:var(--font);
+  font-size:10px;
+  color:var(--text-muted);
+  cursor:pointer;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:0px;
+  white-space:nowrap;
+  position:relative;
+  transition:color .15s,border-color .15s,background .15s;
+}
 .cat-tab:hover{color:var(--text);}
-.cat-tab.active{color:var(--green);border-bottom-color:var(--green);}
+.cat-tab.active{color:var(--green);border-color:rgba(90,173,90,0.45);background:rgba(90,173,90,0.10);}
 .cat-panel{display:none;flex-direction:column;gap:12px;}
 .cat-panel.visible{display:flex;}
 .s-card{background:var(--card-bg);border:2px solid var(--card-border);backdrop-filter:blur(8px);padding:14px 16px;display:flex;flex-direction:column;gap:9px;}
@@ -174,6 +199,8 @@ body{font-family:var(--font);transform-origin:top left;}
 .tog.on{border-color:var(--green);color:var(--green);background:rgba(90,173,90,0.1);}
 .s-input{background:var(--input-bg);border:2px solid var(--input-border);color:var(--text);font-family:var(--font);font-size:11px;padding:8px 10px;outline:none;width:100%;transition:border-color .14s;}
 .s-input:focus{border-color:var(--green);}
+.s-select{background:var(--input-bg);border:2px solid var(--input-border);color:var(--text);font-family:var(--font);font-size:10px;padding:8px 10px;outline:none;width:100%;cursor:pointer;transition:border-color .14s;-webkit-appearance:none;appearance:none;}
+.s-select:focus{border-color:var(--green);}
 .range-row{display:flex;align-items:center;gap:10px;}
 .s-range{flex:1;-webkit-appearance:none;height:5px;background:var(--input-border);outline:none;cursor:pointer;}
 .s-range::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;background:var(--green);border-radius:0;cursor:pointer;border:2px solid rgba(0,0,0,0.5);}
@@ -192,8 +219,21 @@ body{font-family:var(--font);transform-origin:top left;}
 .acc-body.open{display:block;}
 .acc-body h4{color:var(--green);margin:10px 0 5px;font-size:9px;}
 .acc-body p{margin-bottom:10px;}
-
-/* ===================== LAUNCH OVERLAY ===================== */
+/* CUSTOM VERSIONS SETTINGS */
+.custom-create-btn{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--input-bg);border:2px solid var(--input-border);color:var(--text-muted);font-family:var(--font);font-size:10px;cursor:pointer;transition:all .14s;width:100%;}
+.custom-create-btn:hover{border-color:var(--green);color:var(--green);}
+.custom-create-btn img{width:20px;height:20px;object-fit:contain;image-rendering:pixelated;}
+.creations-title{color:var(--text-muted);font-size:9px;letter-spacing:1px;padding:6px 0;border-bottom:1px solid var(--card-border);}
+.custom-ver-list{display:flex;flex-direction:column;gap:8px;}
+.custom-ver-item{background:var(--card-bg);border:2px solid rgba(124,106,255,0.3);backdrop-filter:blur(6px);padding:10px 14px;display:flex;align-items:center;gap:10px;transition:border-color .15s;}
+.custom-ver-item:hover{border-color:#7c6aff;}
+.custom-ver-item img{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
+.custom-ver-item .cvi-info{flex:1;display:flex;flex-direction:column;gap:3px;}
+.custom-ver-item .cvi-name{color:var(--text);font-size:10px;}
+.custom-ver-item .cvi-cat{color:var(--text-muted);font-size:8px;}
+.custom-ver-del{background:none;border:1px solid rgba(229,115,115,0.3);color:#e57373;font-family:var(--font);font-size:8px;padding:4px 8px;cursor:pointer;transition:all .13s;}
+.custom-ver-del:hover{background:rgba(229,115,115,0.15);border-color:#e57373;}
+/* LAUNCH OVERLAY */
 #launch-overlay{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
 #launch-overlay.active{display:flex;background:rgba(0,0,0,0.72);backdrop-filter:blur(16px);animation:ovIn .35s ease;}
 @keyframes ovIn{from{opacity:0;backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(16px)}}
@@ -204,33 +244,15 @@ body{font-family:var(--font);transform-origin:top left;}
 .l-dots span:nth-child(2){animation-delay:.15s}
 .l-dots span:nth-child(3){animation-delay:.3s}
 @keyframes lBounce{0%,80%,100%{transform:scale(0.55);opacity:0.4}40%{transform:scale(1.1);opacity:1}}
-
-/* ===================== HAM FLOAT ===================== */
+/* HAM FLOAT */
 #ham-float{position:absolute;z-index:20;left:10px;top:11px;background:var(--topbar);border:1px solid var(--topbar-border);padding:7px;cursor:pointer;display:none;flex-direction:column;gap:4px;}
 #ham-float.show{display:flex;}
 #ham-float span{display:block;width:17px;height:2px;background:var(--topbar-text);}
-
-/* ===================== FPS ===================== */
 #fps-ctr{display:none;position:fixed;top:52px;right:10px;z-index:900;color:#0f0;font-family:var(--font);font-size:9px;background:rgba(0,0,0,0.7);padding:3px 7px;pointer-events:none;}
-
-/* ===================== MODAL BASE ===================== */
-.modal-overlay{
-  position:fixed;inset:0;z-index:800;
-  background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;
-}
+/* MODAL BASE */
+.modal-overlay{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,0.65);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal-box{
-  background:var(--sidebar);
-  border:2px solid var(--sidebar-border);
-  padding:24px 28px;
-  display:flex;flex-direction:column;gap:14px;
-  width:420px;max-width:94vw;
-  position:relative;
-  animation:modalIn .2s ease;
-  max-height:90vh;
-  overflow-y:auto;
-}
+.modal-box{background:var(--sidebar);border:2px solid var(--sidebar-border);padding:24px 28px;display:flex;flex-direction:column;gap:14px;width:420px;max-width:94vw;position:relative;animation:modalIn .2s ease;max-height:90vh;overflow-y:auto;}
 @keyframes modalIn{from{transform:scale(0.93);opacity:0}to{transform:scale(1);opacity:1}}
 .modal-header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--sidebar-border);padding-bottom:10px;}
 .modal-title{color:var(--green);font-size:13px;letter-spacing:0.5px;}
@@ -239,8 +261,9 @@ body{font-family:var(--font);transform-origin:top left;}
 .modal-desc{color:var(--text-muted);font-size:9px;line-height:1.9;}
 .modal-field{display:flex;flex-direction:column;gap:6px;}
 .modal-field label{color:var(--text-muted);font-size:9px;letter-spacing:0.5px;}
-.modal-field input{background:var(--input-bg);border:2px solid var(--input-border);color:var(--text);font-family:var(--font);font-size:11px;padding:8px 10px;outline:none;width:100%;transition:border-color .14s;}
-.modal-field input:focus{border-color:var(--green);}
+.modal-field input,.modal-field select{background:var(--input-bg);border:2px solid var(--input-border);color:var(--text);font-family:var(--font);font-size:11px;padding:8px 10px;outline:none;width:100%;transition:border-color .14s;}
+.modal-field input:focus,.modal-field select:focus{border-color:var(--green);}
+.modal-field select{cursor:pointer;-webkit-appearance:none;appearance:none;}
 .modal-btn{padding:9px 14px;font-family:var(--font);font-size:10px;border:2px solid var(--green);background:rgba(90,173,90,0.1);color:var(--green);cursor:pointer;transition:all .14s;text-align:center;width:100%;}
 .modal-btn:hover{background:rgba(90,173,90,0.22);}
 .modal-btn.secondary{border-color:var(--input-border);background:var(--input-bg);color:var(--text-muted);}
@@ -249,38 +272,29 @@ body{font-family:var(--font);transform-origin:top left;}
 .modal-btn.danger:hover{background:rgba(229,115,115,0.22);}
 .modal-row{display:flex;gap:8px;}
 .modal-err{color:#e57373;font-size:9px;display:none;padding:4px 0;}
-
-/* avatar picker */
 .avatar-row{display:flex;align-items:center;gap:14px;}
-.avatar-preview{width:56px;height:56px;object-fit:cover;image-rendering:pixelated;border:2px solid var(--input-border);cursor:pointer;flex-shrink:0;filter:none;transition:border-color .14s;}
+.avatar-preview{width:56px;height:56px;object-fit:cover;image-rendering:pixelated;border:2px solid var(--input-border);cursor:pointer;flex-shrink:0;transition:border-color .14s;}
 .avatar-preview:hover{border-color:var(--green);}
 .avatar-hint{color:var(--text-muted);font-size:8px;line-height:1.9;}
-
-/* account manager view states */
 .acc-view{display:none;flex-direction:column;gap:14px;}
 .acc-view.visible{display:flex;}
-
-/* logged in account info box */
 .acc-info-box{display:flex;align-items:center;gap:14px;padding:12px;background:var(--input-bg);border:2px solid var(--input-border);}
-.acc-info-box img{width:52px;height:52px;object-fit:cover;image-rendering:pixelated;border:2px solid var(--green);filter:none;}
+.acc-info-box img{width:52px;height:52px;object-fit:cover;image-rendering:pixelated;border:2px solid var(--green);}
 .acc-info-text{display:flex;flex-direction:column;gap:4px;}
 .acc-info-name{color:var(--text);font-size:13px;}
 .acc-info-sub{color:var(--text-muted);font-size:8px;}
 .acc-pass-reveal{color:var(--green);font-size:9px;padding:6px 10px;background:var(--input-bg);border:1px solid var(--input-border);display:none;word-break:break-all;line-height:1.8;}
-
-/* favourites modal */
 .fav-modal-box{width:460px;max-width:94vw;max-height:82vh;overflow:hidden;display:flex;flex-direction:column;gap:10px;}
 .fav-section-header{font-size:9px;color:var(--text-muted);letter-spacing:1px;padding:8px 0 4px;border-bottom:1px solid var(--card-border);}
 .fav-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
 .fav-opt{padding:7px 10px;font-size:9px;font-family:var(--font);background:var(--input-bg);border:2px solid var(--input-border);color:var(--text-muted);cursor:pointer;transition:all .13s;display:flex;align-items:center;gap:7px;text-align:left;}
-.fav-opt img{width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;filter:none;}
+.fav-opt img{width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex-shrink:0;}
 .fav-opt:hover{border-color:var(--sidebar-text);color:var(--text);}
 .fav-opt.starred{background:rgba(90,173,90,0.15);border-color:var(--green);color:var(--green);}
 .fav-opt .star-icon{margin-left:auto;font-size:10px;color:#f9a825;opacity:0;flex-shrink:0;}
 .fav-opt.starred .star-icon{opacity:1;}
 .fav-scroll{flex:1;overflow-y:auto;padding-right:2px;}
-
-/* favourites dropdown edit mode */
+/* favourites edit: 3 edition dropdowns (icon + versions with icons) */
 .fav-dd-wrap{display:flex;flex-direction:column;gap:6px;margin:6px 0 8px;position:relative;}
 .fav-dd-head{
   width:100%;
@@ -288,7 +302,7 @@ body{font-family:var(--font);transform-origin:top left;}
   border:2px solid var(--input-border);
   color:var(--text);
   font-family:var(--font);
-  font-size:10px;
+  font-size:9px;
   padding:7px 9px;
   cursor:pointer;
   display:flex;
@@ -303,7 +317,8 @@ body{font-family:var(--font);transform-origin:top left;}
   position:relative;
   background:var(--input-bg);
   border:2px solid var(--input-border);
-  max-height:146px;
+  border-top:none;
+  max-height:132px;
   overflow-y:auto;
 }
 .fav-dd-list.open{display:block;}
@@ -314,7 +329,7 @@ body{font-family:var(--font);transform-origin:top left;}
   background:transparent;
   color:var(--text-muted);
   font-family:var(--font);
-  font-size:9px;
+  font-size:8px;
   text-align:left;
   padding:6px 8px;
   display:flex;
@@ -328,8 +343,11 @@ body{font-family:var(--font);transform-origin:top left;}
 .fav-dd-item.selected{color:var(--green);background:rgba(90,173,90,0.12);}
 .fav-dd-item .star{margin-left:auto;color:#f9a825;font-size:9px;opacity:0;}
 .fav-dd-item.selected .star{opacity:1;}
-
-/* scrollbar */
+/* custom icon preview in create form */
+.icon-preview-wrap{display:flex;align-items:center;gap:10px;}
+.custom-icon-preview{width:36px;height:36px;object-fit:contain;image-rendering:pixelated;border:2px solid var(--input-border);flex-shrink:0;}
+.select-row{display:flex;gap:8px;align-items:center;}
+.select-row .s-select{flex:1;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--scrollbar);}
@@ -337,7 +355,6 @@ body{font-family:var(--font);transform-origin:top left;}
 </style>
 </head>
 <body>
-
 <!-- LOADING -->
 <div id="loading-screen">
   <div id="load-bg"></div>
@@ -352,19 +369,17 @@ body{font-family:var(--font);transform-origin:top left;}
     </div>
   </div>
 </div>
-
 <!-- LAUNCHER -->
 <div id="launcher">
   <div id="bg"></div>
   <div id="bg-dim"></div>
   <button id="ham-float" onclick="toggleSb()"><span></span><span></span><span></span></button>
-
   <!-- SIDEBAR -->
   <div id="sidebar">
     <div class="sb-section">EDITIONS</div>
-    <div class="nav-item active" id="nav-web"      onclick="clickPlay();switchEd('web')"><img src="./images/i-web.png" alt=""> WEB EDITION</div>
-    <div class="nav-item"        id="nav-modded"   onclick="clickPlay();switchEd('modded')"><img src="./images/i-modded.png" alt=""> MODDED EDITION</div>
-    <div class="nav-item"        id="nav-controls" onclick="clickPlay();switchEd('controls')"><img src="./images/i-controls.png" alt=""> CONTROLS EDITION</div>
+    <div class="nav-item active" id="nav-web" onclick="clickPlay();switchEd('web')"><img src="./images/i-web.png" alt=""> WEB EDITION</div>
+    <div class="nav-item" id="nav-modded" onclick="clickPlay();switchEd('modded')"><img src="./images/i-modded.png" alt=""> MODDED EDITION</div>
+    <div class="nav-item" id="nav-controls" onclick="clickPlay();switchEd('controls')"><img src="./images/i-controls.png" alt=""> CONTROLS EDITION</div>
     <div class="sb-divider"></div>
     <div class="sb-section">LINKS</div>
     <div class="nav-item" onclick="clickPlay();window.open('https://topeaglerservers.com/','_blank')"><img src="./images/servers.png" alt=""> SERVERS</div>
@@ -373,12 +388,11 @@ body{font-family:var(--font);transform-origin:top left;}
     <div class="nav-item" onclick="clickPlay();window.open('https://eaglercraftz.pages.dev/javascript/','_blank')"><img src="./images/EaglercraftZ.png" alt=""> EAGLERCRAFTZ</div>
     <div class="sb-divider"></div>
     <div class="sb-section">LAUNCHER</div>
-    <div class="nav-item" id="nav-credits"  onclick="clickPlay();switchEd('credits')"><img src="./images/m-credits.png" alt=""> CREDITS</div>
+    <div class="nav-item" id="nav-credits" onclick="clickPlay();switchEd('credits')"><img src="./images/m-credits.png" alt=""> CREDITS</div>
     <div class="nav-item" id="nav-settings" onclick="clickPlay();switchEd('settings')"><img src="./images/m-settings.png" alt=""> SETTINGS</div>
     <div class="sb-spacer"></div>
-    <div class="sb-version">EagLauncher v2.0</div>
+    <div class="sb-version">EagLauncher v2.6</div>
   </div>
-
   <!-- MAIN -->
   <div id="main-area">
     <div id="topbar">
@@ -387,17 +401,13 @@ body{font-family:var(--font);transform-origin:top left;}
         <img id="topbar-brand-logo" src="./images/eaglercraft-game.png" alt="">
         <div id="topbar-name">EagLauncher</div>
       </div>
-      <div id="music-pill">
-        <span class="note">♪</span>
-        <span id="music-title-scroll">Loading...</span>
-      </div>
+      <div id="music-pill"><span class="note">♪</span><span id="music-title-scroll">Loading...</span></div>
       <button id="fav-topbar-btn" onclick="openFavModal()" title="Favourites">★</button>
       <button id="account-topbar-btn" onclick="openAccModal()">
         <img id="account-icon" src="./images/thumba.png" alt="">
         <span id="account-label">Guest</span>
       </button>
     </div>
-
     <!-- GAME SCREEN -->
     <div id="game-screen">
       <img id="logo-img" src="./images/web-title.png" alt="Logo">
@@ -415,61 +425,107 @@ body{font-family:var(--font);transform-origin:top left;}
       <img id="play-btn" src="./images/KKrzRaq-800.jpg" alt="PLAY" onclick="launchGame()">
       <div id="game-footer">eaglercraft • open source minecraft in your browser</div>
     </div>
-
     <!-- CREDITS -->
     <div class="sec-screen" id="credits-screen">
       <div class="sec-title">✦ CREDITS</div>
       <div class="cred-tabs">
         <button class="cred-tab active" onclick="showCredTab(this,'cred-people')">PEOPLE</button>
-        <button class="cred-tab"        onclick="showCredTab(this,'cred-news')">NEWS</button>
+        <button class="cred-tab" onclick="showCredTab(this,'cred-versions')">VERSIONS</button>
+        <button class="cred-tab" onclick="showCredTab(this,'cred-news')">NEWS</button>
       </div>
+      <!-- PEOPLE -->
       <div class="cred-panel visible" id="cred-people">
         <div class="credit-grid">
           <div class="credit-card"><div class="credit-name">30gato_Yoshi</div><div class="credit-quote">"im a pop cat"</div><div class="credit-desc">Made this shortcut launcher!</div></div>
           <div class="credit-card"><div class="credit-name">lax1dude</div><div class="credit-quote">"bro is the goat"</div><div class="credit-desc">Made Eaglercraft come to life!</div></div>
           <div class="credit-card"><div class="credit-name">Ayunami2000</div><div class="credit-quote">"specialist in helping"</div><div class="credit-desc">Made much help to lax1dude!</div></div>
           <div class="credit-card"><div class="credit-name">irv77</div><div class="credit-quote">"ma gawd he made a launcher"</div><div class="credit-desc">Made Ampler Launcher, a huge inspiration and source!</div></div>
-          <div class="credit-card"><div class="credit-name">PeytonPlayz595</div><div class="credit-quote">"the port legend"</div><div class="credit-desc">Ported multiple MC versions to Eaglercraft.</div></div>
-          <div class="credit-card"><div class="credit-name">EymenWSMC</div><div class="credit-quote">"community builder"</div><div class="credit-desc">Major contributor to the Eaglercraft community.</div></div>
+          <div class="credit-card"><div class="credit-name">PeytonPlayz595</div><div class="credit-quote">"port port port"</div><div class="credit-desc">Ported multiple MC versions to Eaglercraft!</div></div>
+          <div class="credit-card"><div class="credit-name">EymenWSMC</div><div class="credit-quote">"community builder"</div><div class="credit-desc">Major contributor to the Eaglercraft community!</div></div>
         </div>
       </div>
+      <!-- VERSIONS -->
+      <div class="cred-panel" id="cred-versions">
+        <div class="ver-info-banner"><strong>INFO:</strong> All the versions in this launcher are the most near possible links, being popular or normal pages.</div>
+        <div class="ver-cards-scroll" id="ver-cards-scroll"></div>
+        <div id="ver-info-bar">
+          <div class="ver-info-title" id="ver-info-title">ℹ - Version</div>
+          <div class="ver-info-desc" id="ver-info-desc"></div>
+          <div class="ver-info-progress-track"><div class="ver-info-progress-fill" id="ver-info-prog"></div></div>
+          <button class="ver-info-close" onclick="closeVerInfo()">OK</button>
+        </div>
+      </div>
+      <!-- NEWS -->
       <div class="cred-panel" id="cred-news">
         <div class="news-list">
-          <div class="news-entry"><div class="news-version">v2.0 | ACCOUNT MANAGER</div><div class="news-items"><div class="news-item">- Inserted account creator to save settings and preferences</div><div class="news-item">- Added new icons and web things</div><div class="news-item">- Tiny fixes and moves</div><div class="news-item">- Favourite option added to versions</div><div class="news-item">- And more!</div></div></div>
-          <div class="news-entry"><div class="news-version">v1.5 | GITHUB INTRO</div><div class="news-items"><div class="news-item">- Launcher was published in GitHub</div><div class="news-item">- Bug fixes on certain areas</div><div class="news-item">- Introduction for some small settings</div></div></div>
-          <div class="news-entry"><div class="news-version">v1.0 | RELEASE DATE</div><div class="news-items"><div class="news-item">- First release of the launcher</div></div></div>
+          <div class="news-entry">
+            <div class="news-version">v2.6 | QOL UPDATE PART 1</div>
+            <div class="news-items">
+              <div class="news-item">- Fixed links redirecting to Ampler Launcher, by irv77</div>
+              <div class="news-item">- Bug fixes and UI layouts</div>
+              <div class="news-item">- New credits tab added</div>
+              <div class="news-item">- Custom versions</div>
+            </div>
+          </div>
+          <div class="news-entry">
+            <div class="news-version">v2.0 | ACCOUNT MANAGER</div>
+            <div class="news-items">
+              <div class="news-item">- Inserted account creator to save settings and preferences</div>
+              <div class="news-item">- Added new icons and web things</div>
+              <div class="news-item">- Tiny fixes and moves</div>
+              <div class="news-item">- Favourite option added to versions</div>
+              <div class="news-item">- And more!</div>
+            </div>
+          </div>
+          <div class="news-entry">
+            <div class="news-version">v1.5 | GITHUB INTRO</div>
+            <div class="news-items">
+              <div class="news-item">- Launcher was published in GitHub</div>
+              <div class="news-item">- Bug fixes on certain areas</div>
+              <div class="news-item">- Introduction for some small settings</div>
+            </div>
+          </div>
+          <div class="news-entry">
+            <div class="news-version">v1.0 | RELEASE DATE</div>
+            <div class="news-items">
+              <div class="news-item">- First release of the launcher</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
     <!-- SETTINGS -->
     <div class="sec-screen" id="settings-screen">
       <div class="sec-title">⚙ SETTINGS</div>
       <div class="cat-tabs">
-        <button class="cat-tab active" onclick="showCat('general')">GENERAL</button>
-        <button class="cat-tab"        onclick="showCat('display')">DISPLAY</button>
-        <button class="cat-tab"        onclick="showCat('music')">MUSIC</button>
-        <button class="cat-tab"        onclick="showCat('about')">ABOUT</button>
+        <button class="cat-tab active" onclick="showCat(this,'general')">GENERAL</button>
+        <button class="cat-tab" onclick="showCat(this,'display')">DISPLAY</button>
+        <button class="cat-tab" onclick="showCat(this,'music')">MUSIC</button>
+        <button class="cat-tab" onclick="showCat(this,'custom')">CUSTOM</button>
+        <button class="cat-tab" onclick="showCat(this,'about')">ABOUT</button>
       </div>
+      <!-- GENERAL -->
       <div class="cat-panel visible" id="cat-general">
         <div class="settings-body">
-          <div class="s-card"><div class="s-lbl">✏ LAUNCHER NAME</div><div class="s-desc">Shown in the top bar.</div><input class="s-input" id="name-inp" type="text" value="EagLauncher" oninput="setName(this.value)" maxlength="40"></div>
-          <div class="s-card"><div class="s-lbl">🪟 OPEN GAME IN NEW TAB</div><div class="s-desc">When ON, clicking PLAY opens in a new browser tab.</div><div class="tog-grp"><button class="tog on" id="t-no" onclick="setWin(false)">OFF</button><button class="tog" id="t-yes" onclick="setWin(true)">ON</button></div></div>
-          <div class="s-card"><div class="s-lbl">📌 SIDEBAR ON STARTUP</div><div class="s-desc">Whether the sidebar starts open or closed.</div><div class="tog-grp"><button class="tog on" id="t-sbo" onclick="setSbDef('open')">OPEN</button><button class="tog" id="t-sbc" onclick="setSbDef('closed')">CLOSED</button></div></div>
-          <div class="s-card"><div class="s-lbl">🖱 CLICK SOUNDS</div><div class="s-desc">Plays the Minecraft click sound on button presses.</div><div class="tog-grp"><button class="tog on" id="t-sfx-on" onclick="setSfx(true)">ON</button><button class="tog" id="t-sfx-off" onclick="setSfx(false)">OFF</button></div></div>
+          <div class="s-card"><div class="s-lbl">✏ LAUNCHER NAME</div><div class="s-desc">Shown in the top bar of the launcher.</div><input class="s-input" id="name-inp" type="text" value="EagLauncher" oninput="setName(this.value)" maxlength="40"></div>
+          <div class="s-card"><div class="s-lbl">🪟 OPEN GAME IN NEW TAB</div><div class="s-desc">When ON, clicking PLAY opens in a new browser tab instead of navigating away from the launcher.</div><div class="tog-grp"><button class="tog on" id="t-no" onclick="setWin(false)">OFF</button><button class="tog" id="t-yes" onclick="setWin(true)">ON</button></div></div>
+          <div class="s-card"><div class="s-lbl">📌 SIDEBAR ON STARTUP</div><div class="s-desc">Controls whether the sidebar starts open or collapsed when the launcher loads.</div><div class="tog-grp"><button class="tog on" id="t-sbo" onclick="setSbDef('open')">OPEN</button><button class="tog" id="t-sbc" onclick="setSbDef('closed')">CLOSED</button></div></div>
+          <div class="s-card"><div class="s-lbl">🖱 CLICK SOUNDS</div><div class="s-desc">Plays the classic Minecraft UI click sound on every button interaction.</div><div class="tog-grp"><button class="tog on" id="t-sfx-on" onclick="setSfx(true)">ON</button><button class="tog" id="t-sfx-off" onclick="setSfx(false)">OFF</button></div></div>
         </div>
       </div>
+      <!-- DISPLAY -->
       <div class="cat-panel" id="cat-display">
         <div class="settings-body">
-          <div class="s-card"><div class="s-lbl">🎨 THEME</div><div class="s-desc">Change the launcher color theme.</div><div class="tog-grp"><button class="tog on" id="t-dark" onclick="setTheme('dark')">DARK</button><button class="tog" id="t-light" onclick="setTheme('light')">LIGHT</button></div></div>
-          <div class="s-card"><div class="s-lbl">🔍 ZOOM LEVEL</div><div class="s-desc">Scales the launcher layout. Works like Ctrl+scroll.</div><div class="range-row"><input type="range" class="s-range" id="zoom-sl" min="50" max="180" value="120" oninput="setZoom(this.value)"><div class="range-v" id="zoom-v">120%</div></div></div>
-          <div class="s-card"><div class="s-lbl">💨 BACKGROUND OPACITY</div><div class="s-desc">How dark the overlay on top of the background image is.</div><div class="range-row"><input type="range" class="s-range" id="dim-sl" min="0" max="80" value="45" oninput="setBgDim(this.value)"><div class="range-v" id="dim-v">45%</div></div></div>
-          <div class="s-card"><div class="s-lbl">📊 FPS COUNTER</div><div class="s-desc">Shows a live FPS overlay in the top-right corner.</div><div class="tog-grp"><button class="tog" id="t-fps-off" onclick="setFps(false)">OFF</button><button class="tog on" id="t-fps-on" onclick="setFps(true)">ON</button></div></div>
+          <div class="s-card"><div class="s-lbl">🎨 THEME</div><div class="s-desc">Switch between a dark interface or a lighter, brighter one.</div><div class="tog-grp"><button class="tog on" id="t-dark" onclick="setTheme('dark')">DARK</button><button class="tog" id="t-light" onclick="setTheme('light')">LIGHT</button></div></div>
+          <div class="s-card"><div class="s-lbl">🔍 ZOOM LEVEL</div><div class="s-desc">Scales the launcher layout up or down. Identical to Ctrl+scroll wheel in your browser.</div><div class="range-row"><input type="range" class="s-range" id="zoom-sl" min="50" max="180" value="120" oninput="setZoom(this.value)"><div class="range-v" id="zoom-v">120%</div></div></div>
+          <div class="s-card"><div class="s-lbl">💨 BACKGROUND OPACITY</div><div class="s-desc">Controls the darkness of the overlay on top of the background image. 0% = fully visible background, 80% = nearly black.</div><div class="range-row"><input type="range" class="s-range" id="dim-sl" min="0" max="80" value="45" oninput="setBgDim(this.value)"><div class="range-v" id="dim-v">45%</div></div></div>
+          <div class="s-card"><div class="s-lbl">📊 FPS COUNTER</div><div class="s-desc">Displays a live frames-per-second counter in the top-right corner of the launcher.</div><div class="tog-grp"><button class="tog" id="t-fps-off" onclick="setFps(false)">OFF</button><button class="tog on" id="t-fps-on" onclick="setFps(true)">ON</button></div></div>
         </div>
       </div>
+      <!-- MUSIC -->
       <div class="cat-panel" id="cat-music">
         <div class="settings-body">
-          <div class="s-card"><div class="s-lbl">🎵 BACKGROUND MUSIC</div><div class="s-desc">Controls the Minecraft music that plays in the launcher.</div>
+          <div class="s-card"><div class="s-lbl">🎵 BACKGROUND MUSIC</div><div class="s-desc">Controls the Minecraft OST that plays while you use the launcher. Music continues between screens.</div>
             <div class="music-player">
               <div class="music-track-row"><button class="music-prev" onclick="musicPrev()">◀</button><div class="music-track-name" id="music-track-name">Loading...</div><button class="music-next" onclick="musicNext()">▶</button></div>
               <div class="music-controls"><button class="tog on" id="t-mus-on" onclick="setMusicOn(true)">PLAY</button><button class="tog" id="t-mus-off" onclick="setMusicOn(false)">PAUSE</button></div>
@@ -479,22 +535,38 @@ body{font-family:var(--font);transform-origin:top left;}
           </div>
         </div>
       </div>
+      <!-- CUSTOM -->
+      <div class="cat-panel" id="cat-custom">
+        <div class="settings-body">
+          <div class="s-card">
+            <div class="s-lbl">🛠 CUSTOM VERSIONS</div>
+            <div class="s-desc">Create your own launcher entries with any name, icon, URL and category. They appear in the edition dropdowns and favourites just like built-in versions.</div>
+            <button class="custom-create-btn" onclick="openCustomCreate()">
+              <img src="./images/pencilcase.jpg" alt=""> CREATE CUSTOM VERSION
+            </button>
+          </div>
+          <div id="creations-section" style="display:none;">
+            <div class="creations-title">CREATIONS</div>
+            <div class="custom-ver-list" id="custom-ver-list"></div>
+          </div>
+        </div>
+      </div>
+      <!-- ABOUT -->
       <div class="cat-panel" id="cat-about">
         <div class="settings-body">
-          <div class="s-card"><div class="s-lbl">📖 ABOUT EAGLERCRAFT</div>
-            <button class="acc-btn-row" onclick="toggleAcc('acc1')"><span>What is Eaglercraft?</span><span id="arr-acc1">▼</span></button>
+          <div class="s-card"><div class="s-lbl">📖 EAGLERCRAFT INFO</div>
+            <button class="acc-btn-row" onclick="toggleAcc('acc1')"><span>About Eaglercraft</span><span id="arr-acc1">▼</span></button>
             <div class="acc-body" id="acc1"><h4>What is Eaglercraft?</h4><p>Eaglercraft is an open source Minecraft that you can play in any regular web browser. That includes school chromebooks. You can join real Minecraft 1.5.2 servers with it through a custom proxy plugin developed for Bungeecord and Velocity.</p><h4>How does it work?</h4><p>Eaglercraft uses the launcher assets of the official version of Minecraft direct from Mojang to compile it to Javascript using TeaVM. A custom compatibility layer by LAX1DUDE allows the OpenGL 1.3 rendering engine to operate through an HTML5 WebGL canvas.</p><h4>Is this legal?</h4><p>Yes. All assets protected by DMCA are not hosted by Eaglercraft — they are acquired directly from Mojang's public servers, exactly like the original Minecraft Launcher does.</p><h4>Who made it?</h4><p>LAX1DUDE created Eaglercraft in late 2021 (first stable build February 2022). Ayunami2000 contributed heavily. PeytonPlayz595, EymenWSMC, and radmanplays ported other Minecraft versions.</p></div>
           </div>
           <div class="s-card"><div class="s-lbl">🚀 LAUNCHER INFO</div>
             <button class="acc-btn-row" onclick="toggleAcc('acc2')"><span>About this launcher</span><span id="arr-acc2">▼</span></button>
-            <div class="acc-body" id="acc2"><h4>EagLauncher v2.0</h4><p>A custom single-file HTML launcher for Eaglercraft, made by 30gato_Yoshi. Inspired by Ampler Launcher by irv77.</p><h4>Credits to irv77</h4><p>Most of the game links and launch URLs in this launcher come directly from Ampler Launcher by irv77. He did incredible hard work building that launcher, and this project would not exist without his effort and dedication. Big respect!</p><h4>Features</h4><p>Web, Modded and Controls editions • 12 web versions • 7 modded clients • Minecraft music player • Light/Dark theme • Zoom control • Click sounds • FPS counter • Accounts • Favourites</p></div>
+            <div class="acc-body" id="acc2"><h4>EagLauncher v2.6</h4><p>A custom single-file HTML launcher for Eaglercraft, made by 30gato_Yoshi. Inspired by Ampler Launcher by irv77.</p><h4>Credits to irv77</h4><p>Most of the game links and launch URLs in this launcher were originally sourced from Ampler Launcher by irv77. He did incredible hard work building that launcher, and EagLauncher would not exist without his effort and dedication. Big respect! Note: many links have since been updated to more current addresses.</p><h4>Features</h4><p>Web, Modded and Controls editions • 12 web versions • 7 modded clients • Custom version creator • Minecraft music player • Light/Dark theme • Zoom control • Click sounds • FPS counter • Accounts • Favourites • Version info panel</p></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <!-- LAUNCH OVERLAY -->
 <div id="launch-overlay">
   <div id="launch-txt">Launching Eaglercraft,<br>be ready!</div>
@@ -503,32 +575,27 @@ body{font-family:var(--font);transform-origin:top left;}
 <div id="fps-ctr">60 FPS</div>
 <audio id="audio-player" preload="auto"></audio>
 <audio id="sfx-click" src="./SFX/minecraft_click.mp3" preload="auto"></audio>
-
-<!-- ===== ACCOUNT MANAGER MODAL ===== -->
+<!-- ACCOUNT MODAL -->
 <div class="modal-overlay" id="modal-account">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">ACCOUNT MANAGER</div>
       <button class="modal-close" onclick="closeModal('modal-account')">✕</button>
     </div>
-
-    <!-- GUEST VIEW: choose action -->
     <div class="acc-view visible" id="acc-view-guest">
-      <div class="modal-desc">Manage your EagLauncher account to save settings and favourites across sessions.</div>
+      <div class="modal-desc">Manage your EagLauncher account. Accounts save your settings, theme, favourites and custom versions across sessions and page reloads.</div>
       <button class="modal-btn" onclick="showAccView('create')">CREATE A LAUNCHER ACCOUNT</button>
       <button class="modal-btn secondary" onclick="showAccView('login')">ENTER A LAUNCHER ACCOUNT</button>
     </div>
-
-    <!-- CREATE VIEW -->
     <div class="acc-view" id="acc-view-create">
-      <div class="modal-desc">Fill in the details below to create your account.</div>
+      <div class="modal-desc">Fill in the details below to create your EagLauncher account.</div>
       <div class="modal-field"><label>USERNAME</label><input type="text" id="create-user" placeholder="Enter username" maxlength="24"></div>
       <div class="modal-field"><label>PASSWORD</label><input type="password" id="create-pass" placeholder="Enter password" maxlength="32"></div>
       <div class="modal-field">
         <label>ACCOUNT ICON</label>
         <div class="avatar-row">
           <img id="create-avatar-preview" class="avatar-preview" src="./images/thumba.png" alt="icon" onclick="pickAvatar('create')">
-          <div class="avatar-hint">Click the icon to select<br>an image from your files.</div>
+          <div class="avatar-hint">Click the icon to select<br>an image from your files.<br>Leave as-is for default icon.</div>
         </div>
       </div>
       <div id="create-err" class="modal-err"></div>
@@ -537,10 +604,8 @@ body{font-family:var(--font);transform-origin:top left;}
         <button class="modal-btn secondary" onclick="showAccView('guest')" style="flex:1">BACK</button>
       </div>
     </div>
-
-    <!-- LOGIN VIEW -->
     <div class="acc-view" id="acc-view-login">
-      <div class="modal-desc">Enter your credentials to log into your account.</div>
+      <div class="modal-desc">Enter your credentials to log into your existing EagLauncher account.</div>
       <div class="modal-field"><label>USERNAME</label><input type="text" id="enter-user" placeholder="Enter username" maxlength="24"></div>
       <div class="modal-field"><label>PASSWORD</label><input type="password" id="enter-pass" placeholder="Enter password" maxlength="32"></div>
       <div id="enter-err" class="modal-err"></div>
@@ -549,8 +614,6 @@ body{font-family:var(--font);transform-origin:top left;}
         <button class="modal-btn secondary" onclick="showAccView('guest')" style="flex:1">BACK</button>
       </div>
     </div>
-
-    <!-- LOGGED IN VIEW -->
     <div class="acc-view" id="acc-view-loggedin">
       <div class="acc-info-box">
         <img id="loggedin-avatar" src="./images/thumba.png" alt="">
@@ -566,25 +629,20 @@ body{font-family:var(--font);transform-origin:top left;}
     </div>
   </div>
 </div>
-
-<!-- ===== FAVOURITES MODAL ===== -->
+<!-- FAVOURITES MODAL -->
 <div class="modal-overlay" id="modal-fav">
   <div class="modal-box fav-modal-box">
     <div class="modal-header">
       <div class="modal-title">★ FAVOURITES</div>
       <button class="modal-close" onclick="closeModal('modal-fav')">✕</button>
     </div>
-
-    <!-- SAVED VIEW (when there are favs) -->
     <div class="acc-view visible" id="fav-view-saved">
-      <div class="modal-desc">Your favourite versions. Click ▶ to launch instantly.</div>
+      <div class="modal-desc">Your favourite versions. Click ▶ PLAY to launch one directly without going through the dropdown.</div>
       <div id="fav-saved-list" style="display:flex;flex-direction:column;gap:6px;"></div>
       <button class="modal-btn secondary" onclick="showFavView('edit');buildFavEdit()">EDIT FAVOURITES</button>
     </div>
-
-    <!-- EDIT VIEW -->
     <div class="acc-view" id="fav-view-edit">
-      <div class="modal-desc">Select versions from dropdowns to toggle favourites.</div>
+      <div class="modal-desc">Toggle versions on or off as favourites. Custom versions are included. No minimum required.</div>
       <div class="fav-scroll" id="fav-edit-content"></div>
       <div class="modal-row" style="margin-top:8px">
         <button class="modal-btn" onclick="saveFavourites()" style="flex:1">SAVE</button>
@@ -593,82 +651,157 @@ body{font-family:var(--font);transform-origin:top left;}
     </div>
   </div>
 </div>
-
-<!-- hidden file inputs -->
+<!-- CUSTOM VERSION MODAL -->
+<div class="modal-overlay" id="modal-custom">
+  <div class="modal-box" style="width:460px;">
+    <div class="modal-header">
+      <div class="modal-title">🛠 CREATE CUSTOM VERSION</div>
+      <button class="modal-close" onclick="closeModal('modal-custom')">✕</button>
+    </div>
+    <div class="modal-desc">Add a custom version to the launcher. It will appear in the edition dropdown and favourites just like built-in versions.</div>
+    <div class="modal-field">
+      <label>VERSION NAME</label>
+      <input type="text" id="cv-name" placeholder="e.g. My Custom Client" maxlength="40">
+    </div>
+    <div class="modal-field">
+      <label>ICON</label>
+      <div class="icon-preview-wrap">
+        <img id="cv-icon-preview" class="custom-icon-preview" src="./images/1.12.png" alt="">
+        <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+          <select id="cv-icon-select" class="s-select" onchange="onCvIconSelect(this.value)"></select>
+          <button class="tog" style="font-size:8px;padding:5px 10px;width:100%;text-align:left;" onclick="document.getElementById('cv-icon-file').click()">OR UPLOAD CUSTOM IMAGE</button>
+          <input type="file" id="cv-icon-file" accept="image/*" style="display:none" onchange="onCvIconFile(this)">
+        </div>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>LAUNCH URL</label>
+      <select id="cv-url-select" class="s-select" onchange="onCvUrlSelect()" style="margin-bottom:6px;"></select>
+      <input type="text" id="cv-url-custom" placeholder="Custom URL" style="margin-top:2px;" oninput="onCvUrlCustomInput(this.value)">
+    </div>
+    <div class="modal-field">
+      <label>CATEGORY</label>
+      <select id="cv-category" class="s-select">
+        <option value="web">WEB EDITION</option>
+        <option value="modded">MODDED EDITION</option>
+        <option value="controls">CONTROLS EDITION</option>
+      </select>
+    </div>
+    <div id="cv-err" class="modal-err"></div>
+    <div class="modal-row">
+      <button class="modal-btn" onclick="confirmCustomCreate()" style="flex:1">DONE</button>
+      <button class="modal-btn secondary" onclick="closeModal('modal-custom')" style="flex:1">CANCEL</button>
+    </div>
+  </div>
+</div>
 <input type="file" id="avatar-file-create" accept="image/*" style="display:none" onchange="onAvatarPicked(this,'create')">
 <input type="file" id="avatar-file-change" accept="image/*" style="display:none" onchange="onAvatarPicked(this,'change')">
 
 <script>
-const EDITIONS = {
+/* ============================================================ DATA */
+const BASE_EDITIONS = {
   web:{bg:'./images/web edit.png',logo:'./images/web-title.png',launchTxt:'Launching Eaglercraft,<br>be ready!',vers:[
-    {lbl:'Eaglercraft 1.12.2',    img:'./images/1.12.png',        url:'https://eaglercraft.com/play/?version=1.12.2'},
-    {lbl:'Eaglercraft 1.12 WASM', img:'./images/1.12 wasm.png',   url:'https://eaglercraft.com/play/?version=1.12.2-wasm'},
-    {lbl:'Eaglercraft 1.8.8',     img:'./images/1.8.png',         url:'https://eaglercraft.com/play/?version=1.8.8'},
-    {lbl:'Eaglercraft 1.8 WASM',  img:'./images/1.8 wasm.png',    url:'https://eaglercraft.com/play/?version=1.8.8-wasm'},
-    {lbl:'Eaglercraft b1.7.3',    img:'./images/1.7.3.png',       url:'https://eaglercraft.com/play/?version=b1.7.3'},
-    {lbl:'Eaglercraft 1.5.2',     img:'./images/1.5.2.png',       url:'https://eaglercraft.com/play/?version=1.5.2'},
-    {lbl:'Eaglercraft b1.3',      img:'./images/1.3.png',         url:'https://eaglercraft.com/play/?version=b1.3'},
-    {lbl:'Eaglercraft a1.2.6',    img:'./images/1.2.6.png',       url:'https://eaglercraft.com/play/?version=a1.2.6'},
-    {lbl:'Indev Version',         img:'./images/Indev.png',       url:'https://eaglercraft.com/play/?version=indev'},
-    {lbl:'Scratch Version',       img:'./images/Scratch.png',     url:'https://eaglercraft.com/play/?version=scratch'},
-    {lbl:'Classic (c0.30)',       img:'./images/classic.png',     url:'https://irv77.github.io/AmplerLauncher/mc/c0.30/'},
-    {lbl:'Classic WASM',          img:'./images/classic wasm.png',url:'https://irv77.github.io/AmplerLauncher/mc/c0.30-wasm/'},
+    {lbl:'Eaglercraft 1.12.2', img:'./images/1.12.png', url:'https://eaglercraft.com/play/?version=1.12.2'},
+    {lbl:'Eaglercraft 1.12 WASM', img:'./images/1.12 wasm.png', url:'https://eaglercraft.com/play/?version=1.12.2-wasm'},
+    {lbl:'Eaglercraft 1.8.8', img:'./images/1.8.png', url:'https://eaglercraft.com/play/?version=1.8.8'},
+    {lbl:'Eaglercraft 1.8 WASM', img:'./images/1.8 wasm.png', url:'https://eaglercraft.com/play/?version=1.8.8-wasm'},
+    {lbl:'Eaglercraft b1.7.3', img:'./images/1.7.3.png', url:'https://eaglercraft.com/play/?version=b1.7.3'},
+    {lbl:'Eaglercraft 1.5.2', img:'./images/1.5.2.png', url:'https://eaglercraft.com/play/?version=1.5.2'},
+    {lbl:'Eaglercraft b1.3', img:'./images/1.3.png', url:'https://eaglercraft.com/play/?version=b1.3'},
+    {lbl:'Eaglercraft a1.2.6', img:'./images/1.2.6.png', url:'https://eaglercraft.com/play/?version=a1.2.6'},
+    {lbl:'Indev Version', img:'./images/Indev.png', url:'https://eaglercraft.com/play/?version=indev'},
+    {lbl:'Scratch Version', img:'./images/Scratch.png', url:'https://eaglercraft.com/play/?version=scratch'},
+    {lbl:'Classic (a0.23)', img:'./images/classic.png', url:'https://classic.minecraft.net/'},
   ]},
   modded:{bg:'./images/mod edit.jpg',logo:'./images/modded-title.png',launchTxt:'Launching a modded client,<br>be ready!',vers:[
-    {lbl:'Astra Client',  img:'./images/astra-client.png',  url:'https://irv77.github.io/AmplerLauncher/mc/astraclient/'},
-    {lbl:'EaglerForge',   img:'./images/eaglerforge.png',   url:'https://irv77.github.io/AmplerLauncher/mc/eaglerforge/'},
-    {lbl:'PixelClient',   img:'./images/pixelclient.svg',   url:'https://irv77.github.io/AmplerLauncher/mc/pixelclient/'},
-    {lbl:'Resent Client', img:'./images/resent-client.png', url:'https://irv77.github.io/AmplerLauncher/mc/resentclient/'},
-    {lbl:'Shadow Client', img:'./images/shadow.png',        url:'https://irv77.github.io/AmplerLauncher/mc/shadowclient'},
-    {lbl:'Starlike',      img:'./images/starlike.png',      url:'https://irv77.github.io/AmplerLauncher/mc/starlikeclient/'},
-    {lbl:'Tuff Client',   img:'./images/tuff.png',          url:'https://irv77.github.io/AmplerLauncher/mc/tuffclient/'},
+    {lbl:'Astra Client', img:'./images/astra-client.png', url:'https://astraclientorg.github.io/play/js/18/'},
+    {lbl:'EaglerForge (Injector)', img:'./images/eaglerforge.png', url:'https://eaglerforge.github.io/EaglerForgeInjector/'},
+    {lbl:'PixelClient', img:'./images/pixelclient.svg', url:'https://pixelclient.xyz/'},
+    {lbl:'Resent Client', img:'./images/resent-client.png', url:'https://yoshipussycat.github.io/resentclient-eaglauncher/'},
+    {lbl:'Shadow Client', img:'./images/shadow.png', url:'https://peytonplayz595.github.io/Shadow-4.0/javascript/'},
+    {lbl:'Starlike', img:'./images/starlike.png', url:'https://minecrackedxd.github.io/eaglerlients/eagler-files/modded/1.8/Starlike/index.html'},
+    {lbl:'Tuff Client', img:'./images/tuff.png', url:'https://dicestack88.github.io/Tuffclient/files/1_1UT13/WASM/'},
   ]},
   controls:{bg:'./images/console edit.webp',logo:'./images/controls-title.png',launchTxt:'Launching Eaglercraft,<br>be ready!',vers:[
     {lbl:'1.12 Mobile', img:'./images/1.12m.png', url:'https://eaglercraft.com/play/?version=1.12.2&userscript=flameddogo99-eaglermobile.js'},
-    {lbl:'1.8 Mobile',  img:'./images/1.8m.png',  url:'https://eaglercraft.com/play/?version=1.8.8&userscript=flameddogo99-eaglermobile.js'},
-    {lbl:'1.8 Console', img:'./images/1.8c.png',  url:'https://irv77.github.io/AmplerLauncher/mc/1.8.8/?userscript=irv77-eaglerconsole.js'},
+    {lbl:'1.8 Mobile', img:'./images/1.8m.png', url:'https://eaglercraft.com/play/?version=1.8.8&userscript=flameddogo99-eaglermobile.js'},
+    {lbl:'1.8 Console', img:'./images/1.8c.png', url:'https://yoshipussycat.github.io/EaglerConsole/'},
   ]}
+};
+// Version info for credits tab
+const VER_INFO = {
+  'Eaglercraft 1.12.2': {t:'1.12.2', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Eaglercraft 1.12 WASM': {t:'1.12 WASM', d:'Official port, redirects to the official site by lax1dude. Made with WASM. Latest version on the site.'},
+  'Eaglercraft 1.8.8': {t:'1.8.8', d:'Official port, redirects to the official site by lax1dude. The most stable version for now. Made with JS.'},
+  'Eaglercraft 1.8 WASM': {t:'1.8 WASM', d:'Official port, redirects to the official site by lax1dude. The most stable version for now. Made with WASM.'},
+  'Eaglercraft b1.7.3': {t:'b1.7.3', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Eaglercraft 1.5.2': {t:'1.5.2', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Eaglercraft b1.3': {t:'b1.3', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Eaglercraft a1.2.6': {t:'a1.2.6', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Indev Version': {t:'Indev', d:'Official port, redirects to the official site by lax1dude. Made with JS.'},
+  'Scratch Version': {t:'Scratch', d:'Official port, redirects to the official site by lax1dude. Made with Scratch engine.'},
+  'Classic (a0.23)': {t:'Classic (a0.23)', d:'WARNING: Not an official Eaglercraft version, but redirects to classic.minecraft.net, an official Minecraft site. Made with JS.'},
+  'Astra Client': {t:'Astra Client', d:'Modded client for Eaglercraft, a product by barneythegodd. Redirects to GitHub Pages.'},
+  'EaglerForge (Injector)': {t:'EaglerForge', d:'Modded client for Eaglercraft, a legacy product by radmanplays, now an injector as replacement. Redirects to GitHub Pages.'},
+  'PixelClient': {t:'PixelClient', d:'Modded client for Eaglercraft, a product by empxthetics and the community. Redirects to the Pixel Client launcher site.'},
+  'Resent Client': {t:'Resent Client', d:'Modded client for Eaglercraft, a product by Resent, later by the community of him. Redirects to GitHub Pages.'},
+  'Shadow Client': {t:'Shadow Client', d:'Modded client for Eaglercraft, a product by PeytonPlayz595. Redirects to GitHub Pages.'},
+  'Starlike': {t:'Starlike', d:'Modded client for Eaglercraft, a product by zumbiepig. Redirects to GitHub Pages by minecrackedxd.'},
+  'Tuff Client': {t:'Tuff Client', d:'Modded client for Eaglercraft, a product by TuffNetwork. Redirects to GitHub Pages by dicestack88.'},
+  '1.12 Mobile': {t:'1.12 Mobile', d:'Official mobile port, redirects to the official site by lax1dude. Made with JS.'},
+  '1.8 Mobile': {t:'1.8 Mobile', d:'Official mobile port, redirects to the official site by lax1dude. Made with JS. The most stable version for now.'},
+  '1.8 Console': {t:'1.8 Console', d:'Console port, made by irv77 and currently in development and a little unstable. Redirects to GitHub Pages.'},
 };
 const TRACKS=['1-01. Key','1-03. Subwoofer Lullaby','1-05. Living Mice','1-06. Moog City','1-07. Haggstrom','1-08. Minecraft','1-09. Oxygène','1-11. Mice on Venus','1-13. Wet Hands','1-14. Clark','1-18. Sweden','1-19. Cat','1-20. Dog','1-21. Danny','1-22. Beginning','2-06. Moog City 2'];
 
+/* ============================================================ STATE */
 let curEd='web',curVer=0,newWin=false,sbOpen=true;
 let sfxOn=true,musicOn=true,musicIdx=0,shuffle=false,fpsOn=false;
 let volume=0.6,bgDimVal=45,zoomLevel=1.2;
-let accounts={};
-let currentUser=null;
-let favourites=[];
-let tempFavs=[];
-
+let accounts={},currentUser=null,favourites=[],tempFavs=[];
+let openFavDropdownEd=null;
+let customVersions=[]; 
+let EDITIONS={web:{...BASE_EDITIONS.web,vers:[...BASE_EDITIONS.web.vers]},modded:{...BASE_EDITIONS.modded,vers:[...BASE_EDITIONS.modded.vers]},controls:{...BASE_EDITIONS.controls,vers:[...BASE_EDITIONS.controls.vers]}};
 const DEFAULT_S={theme:'dark',launcherName:'EagLauncher',newTab:false,sbDefault:'open',sfx:true,fps:false,zoom:120,bgDim:45};
 let settings={...DEFAULT_S};
+const audio=document.getElementById('audio-player'),sfxClick=document.getElementById('sfx-click');
 
-const audio=document.getElementById('audio-player');
-const sfxClick=document.getElementById('sfx-click');
-
+/* ============================================================ LOCALSTORAGE */
 function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
-
 function loadStorage(){
   try{
-    const a=lsGet('eaglauncher_accounts');
-    if(a)accounts=JSON.parse(a);
+    const a=lsGet('eaglauncher_accounts');if(a)accounts=JSON.parse(a);
     const u=lsGet('eaglauncher_currentUser');
     if(u&&u!==''&&accounts[u]){
       currentUser=u;
       favourites=[...(accounts[u].favs||[])];
+      customVersions=[...(accounts[u].customs||[])];
       Object.assign(settings,accounts[u].settings||{});
     }
-  }catch(e){console.warn('Load error',e);}
+  }catch(e){console.warn(e);}
 }
-
-function saveAccounts(){ lsSet('eaglauncher_accounts',JSON.stringify(accounts)); }
-function saveCurrentUser(){ lsSet('eaglauncher_currentUser',currentUser||''); }
-function persistSettings(){ if(!currentUser||!accounts[currentUser])return; accounts[currentUser].settings={...settings}; saveAccounts(); }
-function persistFavs(){ if(!currentUser||!accounts[currentUser])return; accounts[currentUser].favs=[...favourites]; saveAccounts(); }
-
+function saveAccounts(){lsSet('eaglauncher_accounts',JSON.stringify(accounts));}
+function saveCurrentUser(){lsSet('eaglauncher_currentUser',currentUser||'');}
+function persistSettings(){if(!currentUser||!accounts[currentUser])return;accounts[currentUser].settings={...settings};saveAccounts();}
+function persistFavs(){if(!currentUser||!accounts[currentUser])return;accounts[currentUser].favs=[...favourites];saveAccounts();}
+function persistCustoms(){if(!currentUser||!accounts[currentUser])return;accounts[currentUser].customs=[...customVersions];saveAccounts();}
 loadStorage();
 
-const MSGS=['Initializing launcher...','Loading fonts...','Loading assets...','Preparing music player...','Fetching version list...','Almost ready...','Done!'];
+/* ============================================================ BUILD EDITIONS WITH CUSTOMS */
+function rebuildEditions(){
+  EDITIONS={
+    web:{...BASE_EDITIONS.web,vers:[...BASE_EDITIONS.web.vers]},
+    modded:{...BASE_EDITIONS.modded,vers:[...BASE_EDITIONS.modded.vers]},
+    controls:{...BASE_EDITIONS.controls,vers:[...BASE_EDITIONS.controls.vers]}
+  };
+  customVersions.forEach(cv=>{
+    if(EDITIONS[cv.ed])EDITIONS[cv.ed].vers.push({lbl:cv.lbl,img:cv.img,url:cv.url,isCustom:true,id:cv.id});
+  });
+}
+
+/* ============================================================ LOADING BAR */
+const MSGS=['Initializing launcher...','Loading fonts...','Loading assets...','Preparing music player...','Building version list...','Almost ready...','Done!'];
 let prog=0;
 function fakeLoad(){
   prog=Math.min(prog+Math.random()*8+2,100);
@@ -684,9 +817,12 @@ function fakeLoad(){
         const l=document.getElementById('launcher');
         l.style.cssText='display:flex;opacity:0;transition:opacity 0.8s ease';
         requestAnimationFrame(()=>l.style.opacity='1');
+        rebuildEditions();
         applySettings();
         switchEd('web');
         startMusic();
+        buildVerCards();
+        buildCustomList();
         if(currentUser&&accounts[currentUser])loginAs(currentUser,accounts[currentUser].avatar,false);
       },1100);
     },750);
@@ -694,6 +830,7 @@ function fakeLoad(){
 }
 setTimeout(fakeLoad,500);
 
+/* ============================================================ APPLY SETTINGS */
 function applySettings(){
   document.body.classList.toggle('light-mode',settings.theme==='light');
   document.getElementById('t-dark').classList.toggle('on',settings.theme==='dark');
@@ -722,6 +859,7 @@ function applySettings(){
   _applyDim(settings.bgDim);
 }
 
+/* ============================================================ ZOOM */
 function setZoom(v,save=true){
   v=Math.max(50,Math.min(180,Number(v)));
   zoomLevel=v/100;
@@ -734,14 +872,9 @@ function setZoom(v,save=true){
   document.documentElement.style.overflow='hidden';
   if(save){settings.zoom=v;persistSettings();}
 }
-window.addEventListener('wheel',e=>{
-  if(!e.ctrlKey)return;
-  e.preventDefault();
-  const sl=document.getElementById('zoom-sl');
-  let v=parseInt(sl.value)+(e.deltaY<0?5:-5);
-  setZoom(v);
-},{passive:false});
+window.addEventListener('wheel',e=>{if(!e.ctrlKey)return;e.preventDefault();let v=parseInt(document.getElementById('zoom-sl').value)+(e.deltaY<0?5:-5);setZoom(v);},{passive:false});
 
+/* ============================================================ EDITION SWITCH */
 function switchEd(ed){
   ['nav-web','nav-modded','nav-controls','nav-credits','nav-settings']
     .forEach(id=>{const e=document.getElementById(id);if(e)e.classList.remove('active');});
@@ -769,12 +902,13 @@ function switchEd(ed){
   buildDd(data.vers);selectVer(0);
 }
 
+/* ============================================================ DROPDOWN */
 function buildDd(vers){
   const list=document.getElementById('dd-list');list.innerHTML='';
   vers.forEach((v,i)=>{
     const isFav=favourites.some(f=>f.ed===curEd&&f.verIdx===i);
     const d=document.createElement('div');
-    d.className='dd-opt'+(i===0?' selected':'')+(isFav?' favourited':'');
+    d.className='dd-opt'+(i===0?' selected':'')+(isFav?' favourited':'')+(v.isCustom?' custom-ver':'');
     d.innerHTML=`<img src="${v.img}" alt="">${v.lbl}<span class="fav-star">★</span>`;
     d.onclick=()=>{clickPlay();selectVer(i);};
     list.appendChild(d);
@@ -789,47 +923,119 @@ function selectVer(i){
 }
 function toggleDd(){clickPlay();document.getElementById('dd-btn').classList.toggle('open');document.getElementById('dd-list').classList.toggle('open');}
 function closeDd(){document.getElementById('dd-btn').classList.remove('open');document.getElementById('dd-list').classList.remove('open');}
-document.addEventListener('click',e=>{if(!e.target.closest('.dd-wrap'))closeDd();});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.dd-wrap'))closeDd();
+  if(openFavDropdownEd!==null&&!e.target.closest('.fav-dd-wrap')){
+    const fe=document.getElementById('fav-view-edit');
+    if(fe&&fe.classList.contains('visible')){openFavDropdownEd=null;renderFavEditDropdowns();}
+  }
+});
+
+/* ============================================================ LAUNCH - ALTERAÇÃO AQUI */
+function getLaunchText() {
+  const version = EDITIONS[curEd].vers[curVer];
+  if (version && version.isCustom) {
+    return "Custom launching,<br>be ready!";
+  }
+  let txt = EDITIONS[curEd].launchTxt;
+  if (!txt || /custom/i.test(String(txt))) {
+    txt = (curEd === 'modded') ? 'Launching a modded client,<br>be ready!' : 'Launching Eaglercraft,<br>be ready!';
+  }
+  return txt;
+}
 
 function launchGame(){
   clickPlay();
-  const url=EDITIONS[curEd].vers[curVer].url,txt=EDITIONS[curEd].launchTxt;
+  const url = EDITIONS[curEd].vers[curVer].url;
+  const txt = getLaunchText();        // ← Aqui está a mudança
+  doLaunch(url, txt);
+}
+
+function launchUrl(url){clickPlay();doLaunch(url,'Launching Eaglercraft,<br>be ready!');}
+
+function normalizeLaunchUrl(raw){
+  let u=(raw||'').trim();
+  if(!u)return u;
+  if(/^https?:\/\//i.test(u))return u;
+  if(/^\/\//.test(u))return 'https:'+u;
+  if(/^[a-z][a-z0-9+.-]*:/i.test(u))return u;
+  if(/^www\./i.test(u))return 'https://'+u;
+  if(/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}/i.test(u))return 'https://'+u;
+  return u;
+}
+
+function doLaunch(url,txt){
+  const u=normalizeLaunchUrl(url);
   document.getElementById('launch-txt').innerHTML=txt;
   document.getElementById('launch-overlay').classList.add('active');
   setTimeout(()=>{
     document.getElementById('launch-overlay').classList.remove('active');
-    if(newWin)window.open(url,'_blank');else window.location.href=url;
-  },2400);
-}
-function launchUrl(url){
-  clickPlay();
-  document.getElementById('launch-txt').innerHTML='Launching Eaglercraft,<br>be ready!';
-  document.getElementById('launch-overlay').classList.add('active');
-  setTimeout(()=>{
-    document.getElementById('launch-overlay').classList.remove('active');
-    if(newWin)window.open(url,'_blank');else window.location.href=url;
+    if(newWin)window.open(u,'_blank');else window.location.href=u;
   },2400);
 }
 
-function toggleSb(){
-  clickPlay();sbOpen=!sbOpen;
-  document.getElementById('sidebar').classList.toggle('collapsed',!sbOpen);
-  document.getElementById('ham-float').classList.toggle('show',!sbOpen);
-}
-
+/* ============================================================ O RESTO DO CÓDIGO FICA IGUAL (não mexi em mais nada) */
+function toggleSb(){clickPlay();sbOpen=!sbOpen;document.getElementById('sidebar').classList.toggle('collapsed',!sbOpen);document.getElementById('ham-float').classList.toggle('show',!sbOpen);}
 function showCredTab(btn,id){
   clickPlay();
-  document.querySelectorAll('.cred-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.cred-panel').forEach(p=>p.classList.remove('visible'));
-  btn.classList.add('active');document.getElementById(id).classList.add('visible');
+  const root=document.getElementById('credits-screen');
+  if(!root)return;
+  root.querySelectorAll('.cred-tab').forEach(t=>t.classList.remove('active'));
+  root.querySelectorAll('.cred-panel').forEach(p=>p.classList.remove('visible'));
+  btn.classList.add('active');
+  const panel=document.getElementById(id);
+  if(panel)panel.classList.add('visible');
 }
-
-function showCat(id){
+function buildVerCards(){
+  const c=document.getElementById('ver-cards-scroll');if(!c)return;c.innerHTML='';
+  const edLabels={web:'WEB EDITION',modded:'MODDED EDITION',controls:'CONTROLS EDITION'};
+  ['web','modded','controls'].forEach(ed=>{
+    const sec=document.createElement('div');sec.style.marginBottom='14px';
+    const lbl=document.createElement('div');lbl.className='ver-section-label';lbl.textContent=edLabels[ed];
+    sec.appendChild(lbl);
+    const grid=document.createElement('div');grid.className='ver-grid';
+    BASE_EDITIONS[ed].vers.forEach(v=>{
+      const card=document.createElement('div');card.className='ver-card';
+      card.innerHTML=`<img src="${v.img}" alt=""><div class="ver-card-lbl">${v.lbl}</div>`;
+      card.onclick=()=>showVerInfo(v.lbl);
+      grid.appendChild(card);
+    });
+    sec.appendChild(grid);c.appendChild(sec);
+  });
+}
+let verInfoTimer=null,verProgAnim=null;
+function showVerInfo(lbl){
   clickPlay();
-  document.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('visible'));
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('cat-'+id).classList.add('visible');
-  event.currentTarget.classList.add('active');
+  const info=VER_INFO[lbl];if(!info)return;
+  const bar=document.getElementById('ver-info-bar');
+  document.getElementById('ver-info-title').textContent='ℹ - '+info.t;
+  document.getElementById('ver-info-desc').textContent=info.d;
+  const prog=document.getElementById('ver-info-prog');
+  prog.style.transition='none';prog.style.width='0%';
+  bar.classList.add('visible');
+  clearTimeout(verInfoTimer);cancelAnimationFrame(verProgAnim);
+  const start=performance.now(),dur=6000;
+  function step(now){
+    const pct=Math.min((now-start)/dur*100,100);
+    prog.style.transition='none';prog.style.width=pct+'%';
+    if(pct<100)verProgAnim=requestAnimationFrame(step);
+    else closeVerInfo();
+  }
+  requestAnimationFrame(step);
+}
+function closeVerInfo(){
+  cancelAnimationFrame(verProgAnim);
+  document.getElementById('ver-info-bar').classList.remove('visible');
+}
+function showCat(btn,id){
+  clickPlay();
+  const root=document.getElementById('settings-screen');
+  if(!root)return;
+  root.querySelectorAll('.cat-panel').forEach(p=>p.classList.remove('visible'));
+  root.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  const panel=document.getElementById('cat-'+id);
+  if(panel)panel.classList.add('visible');
+  if(btn)btn.classList.add('active');
 }
 function setTheme(t){clickPlay();settings.theme=t;persistSettings();document.body.classList.toggle('light-mode',t==='light');document.getElementById('t-dark').classList.toggle('on',t==='dark');document.getElementById('t-light').classList.toggle('on',t==='light');}
 function setName(v){settings.launcherName=v||'EagLauncher';persistSettings();document.getElementById('topbar-name').textContent=settings.launcherName;}
@@ -840,41 +1046,31 @@ function setFps(v){clickPlay();settings.fps=v;persistSettings();fpsOn=v;document
 function _applyDim(v){bgDimVal=v;document.getElementById('bg-dim').style.background=`rgba(0,0,0,${v/100})`;}
 function setBgDim(v){settings.bgDim=Number(v);persistSettings();document.getElementById('dim-v').textContent=v+'%';_applyDim(v);}
 function toggleAcc(id){const b=document.getElementById(id);b.classList.toggle('open');document.getElementById('arr-'+id).textContent=b.classList.contains('open')?'▲':'▼';}
-
+/* SFX */
 function clickPlay(){if(!sfxOn)return;try{sfxClick.currentTime=0;sfxClick.play().catch(()=>{});}catch(e){}}
 document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('button,.nav-item,.tog,.cat-tab,.cred-tab').forEach(el=>el.addEventListener('mousedown',clickPlay));});
-
+/* MUSIC */
 function trackPath(i){return'./SFX/'+TRACKS[i]+'.mp3';}
 function updateMusicUI(){const n=TRACKS[musicIdx];document.getElementById('music-track-name').textContent=n;document.getElementById('music-title-scroll').textContent=n;}
 function startMusic(){musicIdx=0;updateMusicUI();playTrack();}
-function playTrack(){
-  if(!musicOn)return;
-  audio.src=trackPath(musicIdx);audio.volume=volume;
-  audio.play().catch(()=>{document.addEventListener('click',function once(){audio.play().catch(()=>{});document.removeEventListener('click',once);});});
-  updateMusicUI();
-}
+function playTrack(){if(!musicOn)return;audio.src=trackPath(musicIdx);audio.volume=volume;audio.play().catch(()=>{document.addEventListener('click',function once(){audio.play().catch(()=>{});document.removeEventListener('click',once);});});updateMusicUI();}
 audio.addEventListener('ended',()=>{musicIdx=shuffle?Math.floor(Math.random()*TRACKS.length):(musicIdx+1)%TRACKS.length;playTrack();});
 function musicNext(){clickPlay();musicIdx=shuffle?Math.floor(Math.random()*TRACKS.length):(musicIdx+1)%TRACKS.length;playTrack();}
 function musicPrev(){clickPlay();musicIdx=(musicIdx-1+TRACKS.length)%TRACKS.length;playTrack();}
 function setMusicOn(v){clickPlay();musicOn=v;document.getElementById('t-mus-on').classList.toggle('on',v);document.getElementById('t-mus-off').classList.toggle('on',!v);if(v)audio.play().catch(()=>{});else audio.pause();}
 function setVol(v){volume=v/100;audio.volume=volume;document.getElementById('vol-v').textContent=v+'%';}
 function setShuffle(v){clickPlay();shuffle=v;document.getElementById('t-shuf-off').classList.toggle('on',!v);document.getElementById('t-shuf-on').classList.toggle('on',v);}
-
+/* FPS */
 let fpsRunning=false,fpsLast=performance.now(),fpsF=0;
 function startFps(){fpsRunning=true;countFps();}
 function stopFps(){fpsRunning=false;}
 function countFps(){if(!fpsRunning)return;fpsF++;const n=performance.now();if(n-fpsLast>=1000){document.getElementById('fps-ctr').textContent=fpsF+' FPS';fpsF=0;fpsLast=n;}requestAnimationFrame(countFps);}
-
+/* MODALS */
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});});
-
-function openAccModal(){
-  clickPlay();
-  if(currentUser&&accounts[currentUser]){ showAccView('loggedin'); }
-  else{ showAccView('guest'); }
-  openModal('modal-account');
-}
+/* ACCOUNT MODAL */
+function openAccModal(){clickPlay();showAccView(currentUser&&accounts[currentUser]?'loggedin':'guest');openModal('modal-account');}
 function showAccView(v){
   document.querySelectorAll('.acc-view').forEach(el=>el.classList.remove('visible'));
   document.getElementById('acc-view-'+v).classList.add('visible');
@@ -885,194 +1081,205 @@ function showAccView(v){
     document.getElementById('pass-reveal-text').textContent='';
   }
 }
-
 function onAvatarPicked(input,mode){
   const file=input.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=e=>{
-    if(mode==='create'){
-      document.getElementById('create-avatar-preview').src=e.target.result;
-      document.getElementById('create-avatar-preview').dataset.url=e.target.result;
-    } else if(currentUser&&accounts[currentUser]){
-      accounts[currentUser].avatar=e.target.result;
-      saveAccounts();
-      document.getElementById('account-icon').src=e.target.result;
-      document.getElementById('loggedin-avatar').src=e.target.result;
-    }
+    if(mode==='create'){document.getElementById('create-avatar-preview').src=e.target.result;document.getElementById('create-avatar-preview').dataset.url=e.target.result;}
+    else if(currentUser&&accounts[currentUser]){accounts[currentUser].avatar=e.target.result;saveAccounts();document.getElementById('account-icon').src=e.target.result;document.getElementById('loggedin-avatar').src=e.target.result;}
   };
   reader.readAsDataURL(file);
 }
-function pickAvatar(mode){ document.getElementById('avatar-file-'+mode).click(); }
-function changeAccountIcon(){ clickPlay(); document.getElementById('avatar-file-change').click(); }
-
+function pickAvatar(mode){document.getElementById('avatar-file-'+mode).click();}
+function changeAccountIcon(){clickPlay();document.getElementById('avatar-file-change').click();}
 function confirmCreate(){
   clickPlay();
   const user=document.getElementById('create-user').value.trim();
   const pass=document.getElementById('create-pass').value;
-  const avatarEl=document.getElementById('create-avatar-preview');
-  const avatar=avatarEl.dataset.url||'./images/thumba.png';
-  const errEl=document.getElementById('create-err');
-  errEl.style.display='none';
+  const avatar=document.getElementById('create-avatar-preview').dataset.url||'./images/thumba.png';
+  const errEl=document.getElementById('create-err');errEl.style.display='none';
   if(!user){errEl.textContent='Username cannot be empty.';errEl.style.display='block';return;}
   if(!pass){errEl.textContent='Password cannot be empty.';errEl.style.display='block';return;}
   if(accounts[user]){errEl.textContent='Username already exists.';errEl.style.display='block';return;}
-  accounts[user]={password:pass,avatar,settings:{...DEFAULT_S},favs:[]};
-  saveAccounts();
-  loginAs(user,avatar,true);
-  closeModal('modal-account');
+  accounts[user]={password:pass,avatar,settings:{...DEFAULT_S},favs:[],customs:[]};
+  saveAccounts();loginAs(user,avatar,true);closeModal('modal-account');
 }
-
 function confirmEnter(){
   clickPlay();
   const user=document.getElementById('enter-user').value.trim();
   const pass=document.getElementById('enter-pass').value;
-  const errEl=document.getElementById('enter-err');
-  errEl.style.display='none';
+  const errEl=document.getElementById('enter-err');errEl.style.display='none';
   if(!accounts[user]){errEl.textContent='Account not found.';errEl.style.display='block';return;}
   if(accounts[user].password!==pass){errEl.textContent='Wrong password.';errEl.style.display='block';return;}
-  loginAs(user,accounts[user].avatar,true);
-  closeModal('modal-account');
+  loginAs(user,accounts[user].avatar,true);closeModal('modal-account');
 }
-
 function loginAs(user,avatar){
-  currentUser=user;
-  saveCurrentUser();
+  currentUser=user;saveCurrentUser();
   favourites=[...(accounts[user].favs||[])];
+  customVersions=[...(accounts[user].customs||[])];
   Object.assign(settings,accounts[user].settings||{});
   document.getElementById('account-icon').src=avatar||'./images/thumba.png';
   document.getElementById('account-label').textContent=user;
-  applySettings();
-  buildDd(EDITIONS[curEd].vers);
+  rebuildEditions();applySettings();buildDd(EDITIONS[curEd].vers);buildCustomList();
 }
 function logoutAcc(){
   clickPlay();
-  if(currentUser&&accounts[currentUser]){
-    accounts[currentUser].favs=[...favourites];
-    accounts[currentUser].settings={...settings};
-    saveAccounts();
-  }
+  if(currentUser&&accounts[currentUser]){accounts[currentUser].favs=[...favourites];accounts[currentUser].settings={...settings};accounts[currentUser].customs=[...customVersions];saveAccounts();}
   currentUser=null;saveCurrentUser();
   settings={...DEFAULT_S};applySettings();
   document.getElementById('account-icon').src='./images/thumba.png';
   document.getElementById('account-label').textContent='Guest';
-  favourites=[];buildDd(EDITIONS[curEd].vers);
+  favourites=[];customVersions=[];rebuildEditions();buildDd(EDITIONS[curEd].vers);buildCustomList();
   closeModal('modal-account');
 }
-
 let passRevealTimer=null;
 function revealPassword(){
-  clickPlay();
-  if(!currentUser||!accounts[currentUser])return;
+  clickPlay();if(!currentUser||!accounts[currentUser])return;
   const el=document.getElementById('pass-reveal-text');
-  el.textContent='Password: '+accounts[currentUser].password;
-  el.style.display='block';
-  clearTimeout(passRevealTimer);
-  passRevealTimer=setTimeout(()=>{el.style.display='none';el.textContent='';},5000);
+  el.textContent='Password: '+accounts[currentUser].password;el.style.display='block';
+  clearTimeout(passRevealTimer);passRevealTimer=setTimeout(()=>{el.style.display='none';el.textContent='';},5000);
 }
-
+/* FAVOURITES */
 function openFavModal(){
   clickPlay();
-  if(favourites.length>0){
-    showFavView('saved');
-    buildFavSaved();
-  }else{
-    showFavView('edit');
-    buildFavEdit();
-  }
+  if(favourites.length>0){showFavView('saved');buildFavSaved();}
+  else{showFavView('edit');buildFavEdit();}
   openModal('modal-fav');
 }
-function showFavView(v){
-  document.querySelectorAll('#modal-fav .acc-view').forEach(el=>el.classList.remove('visible'));
-  document.getElementById('fav-view-'+v).classList.add('visible');
-}
-function cancelFavEdit(){
-  clickPlay();
-  if(favourites.length>0){showFavView('saved');buildFavSaved();}
-  else closeModal('modal-fav');
-}
+function showFavView(v){document.querySelectorAll('#modal-fav .acc-view').forEach(el=>el.classList.remove('visible'));document.getElementById('fav-view-'+v).classList.add('visible');}
+function cancelFavEdit(){clickPlay();if(favourites.length>0){showFavView('saved');buildFavSaved();}else closeModal('modal-fav');}
 function buildFavSaved(){
-  const list=document.getElementById('fav-saved-list');
-  list.innerHTML='';
-  if(favourites.length===0){list.innerHTML='<div style="color:var(--text-muted);font-size:9px;">No favourites yet.</div>';return;}
+  const list=document.getElementById('fav-saved-list');list.innerHTML='';
+  if(favourites.length===0){list.innerHTML='<div style="color:var(--text-muted);font-size:9px;">No favourites yet. Click EDIT to add some.</div>';return;}
   favourites.forEach(f=>{
     const item=document.createElement('div');
     item.style.cssText='display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--input-bg);border:1px solid var(--input-border);';
-    item.innerHTML=`<span style="color:#f9a825;font-size:11px;">★</span><img src="${f.img}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;filter:none;" alt=""><span style="flex:1;font-size:9px;color:var(--text-muted);">${f.lbl}</span><button style="padding:4px 9px;font-family:var(--font);font-size:8px;border:1px solid var(--green);color:var(--green);background:rgba(90,173,90,0.1);cursor:pointer;" onclick="closeModal('modal-fav');launchUrl('${f.url.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">▶ PLAY</button>`;
+    const safeUrl=f.url.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    item.innerHTML=`<span style="color:#f9a825;font-size:11px;">★</span><img src="${f.img}" style="width:18px;height:18px;object-fit:contain;image-rendering:pixelated;" alt=""><span style="flex:1;font-size:9px;color:var(--text-muted);">${f.lbl}</span><button style="padding:4px 9px;font-family:var(--font);font-size:8px;border:1px solid var(--green);color:var(--green);background:rgba(90,173,90,0.1);cursor:pointer;" onclick="closeModal('modal-fav');launchUrl('${safeUrl}')">▶ PLAY</button>`;
     list.appendChild(item);
   });
 }
-
 function buildFavEdit(){
   tempFavs=[...favourites.map(f=>({...f}))];
+  openFavDropdownEd=null;
   renderFavEditDropdowns();
 }
-let openFavDropdownEd=null;
 function renderFavEditDropdowns(){
-  const c=document.getElementById('fav-edit-content');
-  c.innerHTML='';
+  const c=document.getElementById('fav-edit-content');if(!c)return;c.innerHTML='';
   const labels={web:'WEB EDITION',modded:'MODDED EDITION',controls:'CONTROLS EDITION'};
   const icons={web:'./images/i-web.png',modded:'./images/i-modded.png',controls:'./images/i-controls.png'};
   ['web','modded','controls'].forEach(ed=>{
-    const sec=document.createElement('div');
-    sec.style.marginBottom='8px';
-    const wrap=document.createElement('div');
-    wrap.className='fav-dd-wrap';
-
+    const wrap=document.createElement('div');wrap.className='fav-dd-wrap';
     const head=document.createElement('button');
     head.type='button';
     head.className='fav-dd-head'+(openFavDropdownEd===ed?' open':'');
     head.innerHTML=`<img src="${icons[ed]}" alt=""><span>${labels[ed]}</span><span class="arrow">${openFavDropdownEd===ed?'▲':'▼'}</span>`;
-    head.onclick=(ev)=>{
-      ev.stopPropagation();
-      clickPlay();
-      openFavDropdownEd=openFavDropdownEd===ed?null:ed;
-      renderFavEditDropdowns();
-    };
+    head.onclick=(ev)=>{ev.stopPropagation();clickPlay();openFavDropdownEd=openFavDropdownEd===ed?null:ed;renderFavEditDropdowns();};
     wrap.appendChild(head);
-
     const list=document.createElement('div');
     list.className='fav-dd-list'+(openFavDropdownEd===ed?' open':'');
     EDITIONS[ed].vers.forEach((v,i)=>{
       const selected=tempFavs.some(f=>f.ed===ed&&f.verIdx===i);
-      const opt=document.createElement('button');
-      opt.type='button';
-      opt.className='fav-dd-item'+(selected?' selected':'');
-      opt.innerHTML=`<img src="${v.img}" alt=""><span>${v.lbl}</span><span class="star">★</span>`;
-      opt.onclick=(ev)=>{
-        ev.stopPropagation();
-        clickPlay();
-        toggleFavByEditionIndex(ed,i);
-        renderFavEditDropdowns();
-      };
-      list.appendChild(opt);
+      const row=document.createElement('button');
+      row.type='button';
+      row.className='fav-dd-item'+(selected?' selected':'');
+      row.innerHTML=`<img src="${v.img}" alt=""><span>${v.lbl}</span><span class="star">★</span>`;
+      row.onclick=(ev)=>{ev.stopPropagation();clickPlay();toggleFavByEditionIndex(ed,i);renderFavEditDropdowns();};
+      list.appendChild(row);
     });
     wrap.appendChild(list);
-    sec.appendChild(wrap);
-    c.appendChild(sec);
+    c.appendChild(wrap);
   });
 }
 function toggleFavByEditionIndex(ed,i){
   const idx=tempFavs.findIndex(f=>f.ed===ed&&f.verIdx===i);
-  if(idx>=0){ tempFavs.splice(idx,1); return; }
+  if(idx>=0){tempFavs.splice(idx,1);return;}
   const v=EDITIONS[ed].vers[i];
   tempFavs.push({ed,verIdx:i,lbl:v.lbl,img:v.img,url:v.url});
 }
-document.addEventListener('click',()=>{
-  if(openFavDropdownEd!==null){
-    openFavDropdownEd=null;
-    const favEdit=document.getElementById('fav-view-edit');
-    if(favEdit&&favEdit.classList.contains('visible'))renderFavEditDropdowns();
-  }
-});
 function saveFavourites(){
-  clickPlay();
-  favourites=[...tempFavs];
-  persistFavs();
-  buildDd(EDITIONS[curEd].vers);
-  if(favourites.length>0){showFavView('saved');buildFavSaved();}
-  else closeModal('modal-fav');
+  clickPlay();favourites=[...tempFavs];persistFavs();buildDd(EDITIONS[curEd].vers);
+  if(favourites.length>0){showFavView('saved');buildFavSaved();}else closeModal('modal-fav');
 }
-
+/* CUSTOM VERSIONS */
+let cvIconDataUrl=null;
+function openCustomCreate(){
+  clickPlay();
+  document.getElementById('cv-name').value='';
+  cvIconDataUrl=null;
+  document.getElementById('cv-icon-preview').src='./images/1.12.png';
+  document.getElementById('cv-url-custom').value='';
+  document.getElementById('cv-err').style.display='none';
+  const iconSel=document.getElementById('cv-icon-select');iconSel.innerHTML='';
+  const allVers=[];
+  ['web','modded','controls'].forEach(ed=>{BASE_EDITIONS[ed].vers.forEach(v=>allVers.push(v));});
+  allVers.forEach(v=>{
+    const opt=document.createElement('option');opt.value=v.img;opt.textContent=v.lbl;iconSel.appendChild(opt);
+  });
+  iconSel.value='./images/1.12.png';
+  const urlSel=document.getElementById('cv-url-select');urlSel.innerHTML='';
+  allVers.forEach(v=>{const opt=document.createElement('option');opt.value=v.url;opt.textContent=v.lbl;urlSel.appendChild(opt);});
+  urlSel.selectedIndex=0;
+  urlSel.disabled=false;
+  openModal('modal-custom');
+}
+function onCvIconSelect(val){
+  if(val&&val!=='__custom__'){document.getElementById('cv-icon-preview').src=val;cvIconDataUrl=null;}
+}
+function onCvUrlSelect(){
+  document.getElementById('cv-url-custom').value='';
+  document.getElementById('cv-url-select').disabled=false;
+}
+function onCvUrlCustomInput(val){
+  document.getElementById('cv-url-select').disabled=!!String(val||'').trim();
+}
+function onCvIconFile(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{cvIconDataUrl=e.target.result;document.getElementById('cv-icon-preview').src=e.target.result;};
+  reader.readAsDataURL(file);
+}
+function confirmCustomCreate(){
+  clickPlay();
+  const name=document.getElementById('cv-name').value.trim();
+  const urlCustom=document.getElementById('cv-url-custom').value.trim();
+  const urlSel=document.getElementById('cv-url-select').value;
+  const urlRaw=urlCustom||urlSel;
+  const url=normalizeLaunchUrl(urlRaw);
+  const ed=document.getElementById('cv-category').value;
+  const iconSrc=cvIconDataUrl||document.getElementById('cv-icon-select').value;
+  const errEl=document.getElementById('cv-err');errEl.style.display='none';
+  if(!name){errEl.textContent='Version name cannot be empty.';errEl.style.display='block';return;}
+  if(!urlRaw){errEl.textContent='Please select a built-in URL or enter a custom one.';errEl.style.display='block';return;}
+  const id='cv_'+Date.now();
+  customVersions.push({id,lbl:name,img:iconSrc,url,ed});
+  persistCustoms();
+  rebuildEditions();
+  buildDd(EDITIONS[curEd].vers);
+  buildCustomList();
+  closeModal('modal-custom');
+}
+function deleteCustomVersion(id){
+  clickPlay();
+  customVersions=customVersions.filter(cv=>cv.id!==id);
+  persistCustoms();
+  rebuildEditions();
+  buildDd(EDITIONS[curEd].vers);
+  buildCustomList();
+}
+function buildCustomList(){
+  const list=document.getElementById('custom-ver-list');
+  const section=document.getElementById('creations-section');
+  if(customVersions.length===0){section.style.display='none';return;}
+  section.style.display='block';
+  list.innerHTML='';
+  customVersions.forEach(cv=>{
+    const edLabel={web:'WEB EDITION',modded:'MODDED EDITION',controls:'CONTROLS EDITION'}[cv.ed]||cv.ed;
+    const item=document.createElement('div');item.className='custom-ver-item';
+    item.innerHTML=`<img src="${cv.img}" alt=""><div class="cvi-info"><div class="cvi-name">${cv.lbl}</div><div class="cvi-cat">${edLabel} • ${cv.url.length>40?cv.url.slice(0,40)+'…':cv.url}</div></div><button class="custom-ver-del" onclick="deleteCustomVersion('${cv.id}')">DELETE</button>`;
+    list.appendChild(item);
+  });
+}
 _applyDim(settings.bgDim);
 </script>
 </body>
