@@ -4,7 +4,7 @@ A launcher created to improve your gameplay experience on EaglerCraft.
 
 ---
 
-## Project Overview
+## What is this launcher
 
 EAGLAUNCHER is a web-based launcher that allows users to access different EaglerCraft versions.
 
@@ -15,7 +15,7 @@ _Example of the launcher layout on v2.0._
 
 ---
 
-## Live Demo
+## Where is the site
 
 [TEST THE SITE HERE](https://yoshipussycat.github.io/EagLAUNCHER/)
 
@@ -26,7 +26,7 @@ For a better experience, you can adjust your browser zoom depending on your devi
 
 ---
 
-## Technologies Used
+## What are the codes used
 
 - HTML5  
 - CSS3  
@@ -35,7 +35,7 @@ For a better experience, you can adjust your browser zoom depending on your devi
 
 ---
 
-## Project Structure
+## What is the structure
 
 
 / (root)
@@ -53,7 +53,7 @@ If the website , the launcher can be downloaded as `.zip`.
 
 ---
 
-## Author
+## Who made this
 
 Developed by 30gato_Yoshi  
 
