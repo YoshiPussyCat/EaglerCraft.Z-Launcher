@@ -11,7 +11,7 @@ EAGLAUNCHER is a web-based launcher that allows users to access different Eagler
 It includes official versions as well as modded clients. This project was heavily inspired by irv77. 
 
 ![Preview](https://github.com/user-attachments/assets/b10b2f23-956f-4463-858e-ac51a0cb4376)  
-_Example of the launcher layout._
+_Example of the launcher layout on v2.0._
 
 ---
 
@@ -57,6 +57,6 @@ If the website , the launcher can be downloaded as `.zip`.
 
 Developed by 30gato_Yoshi  
 
-Special thanks to everyone who contributed to the EaglerCraft community...
+Special thanks to everyone who contributed to the EaglerCraft community.
 _(and my friends for testing the .html)_
-_((and irv77))_
+_((and irv77 for inspiration, big w :D))_
